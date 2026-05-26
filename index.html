@@ -1216,6 +1216,19 @@
     .faq-grid .faq-card:nth-child(5) { transition-delay: 320ms; }
     .faq-grid .faq-card:nth-child(6) { transition-delay: 400ms; }
 
+    /* === Section illustration === */
+    .section-illo {
+      margin: 40px auto 0;
+      max-width: 720px;
+    }
+    .section-illo img {
+      width: 100%;
+      border-radius: var(--radius-xl);
+    }
+    @media (max-width: 640px) {
+      .section-illo { margin-top: 24px; }
+    }
+
     /* === Card emoji icon === */
     .card-emoji {
       font-size: 38px;
@@ -1677,6 +1690,9 @@
             <p>Сам процесс "разобраться что делать" съедает всю энергию.</p>
           </article>
         </div>
+        <figure class="section-illo">
+          <img src="assets/signals_chaos.svg" alt="Иллюстрация: пять карточек с хаотичными мыслями и задачами — типичный паттерн СДВГ-хаоса.">
+        </figure>
       </div>
     </section>
 
@@ -1707,6 +1723,9 @@
             <p>Система должна помогать мягко вернуться, а не умирать.</p>
           </article>
         </div>
+        <figure class="section-illo">
+          <img src="assets/build_result.svg" alt="Иллюстрация: слева хаотичные карточки, справа аккуратный стек — результат после пилота.">
+        </figure>
       </div>
     </section>
 
@@ -1851,6 +1870,9 @@
             <p>Режем лишнее, усиливаем то, что держится. Уходишь со списком: что оставить, что убрать.</p>
           </article>
         </div>
+        <figure class="section-illo">
+          <img src="assets/flow_timeline.svg" alt="Иллюстрация: четыре шага пилота — таймлайн от первого созвона до готовой схемы.">
+        </figure>
       </div>
     </section>
 

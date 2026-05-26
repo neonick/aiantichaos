@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" fill="none">
+  <defs>
+    <linearGradient id="buildBg" x1="60" y1="28" x2="660" y2="332" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F0"/>
+      <stop offset="1" stop-color="#EDFBF8"/>
+    </linearGradient>
+  </defs>
+  <rect x="28" y="20" width="664" height="320" rx="40" fill="url(#buildBg)"/>
+  <circle cx="134" cy="88" r="52" fill="#FFD84C" fill-opacity=".18"/>
+  <circle cx="594" cy="284" r="68" fill="#0C9B89" fill-opacity=".12"/>
+
+  <!-- СЛЕВА: Хаос — карточки разбросаны -->
+  <rect x="56" y="126" width="148" height="78" rx="18" transform="rotate(-11 56 126)" fill="#FFFDF8" stroke="#2B2023" stroke-opacity=".08"/>
+  <rect x="74" y="144" width="90" height="10" rx="5" fill="#FF4F6D" fill-opacity=".45"/>
+  <rect x="74" y="162" width="66" height="8" rx="4" fill="#2B2023" fill-opacity=".11"/>
+  <rect x="74" y="176" width="52" height="8" rx="4" fill="#2B2023" fill-opacity=".08"/>
+
+  <rect x="72" y="210" width="148" height="78" rx="18" transform="rotate(8 72 210)" fill="#FFFDF8" stroke="#2B2023" stroke-opacity=".08"/>
+  <rect x="90" y="228" width="84" height="10" rx="5" fill="#FFD84C" fill-opacity=".65"/>
+  <rect x="90" y="246" width="104" height="8" rx="4" fill="#2B2023" fill-opacity=".11"/>
+  <rect x="90" y="260" width="64" height="8" rx="4" fill="#2B2023" fill-opacity=".08"/>
+
+  <rect x="64" y="96" width="120" height="66" rx="18" transform="rotate(4 64 96)" fill="#FFFDF8" stroke="#2B2023" stroke-opacity=".06"/>
+  <rect x="82" y="112" width="68" height="10" rx="5" fill="#FF7B22" fill-opacity=".3"/>
+  <rect x="82" y="130" width="80" height="8" rx="4" fill="#2B2023" fill-opacity=".09"/>
+
+  <!-- Стрелка: хаос → система -->
+  <path d="M288 190 L382 190" stroke="#FF7B22" stroke-width="6" stroke-linecap="round"/>
+  <path d="M370 178 L386 190 L370 202" fill="none" stroke="#FF7B22" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- СПРАВА: Система — аккуратный стек -->
+  <!-- Карточка нижняя -->
+  <rect x="406" y="234" width="258" height="68" rx="20" fill="#FFFDF8" stroke="#2B2023" stroke-opacity=".06"/>
+  <rect x="426" y="252" width="78" height="10" rx="5" fill="#FFD84C"/>
+  <rect x="426" y="270" width="164" height="8" rx="4" fill="#2B2023" fill-opacity=".12"/>
+
+  <!-- Карточка средняя -->
+  <rect x="418" y="170" width="234" height="68" rx="20" fill="#FFFDF8" stroke="#2B2023" stroke-opacity=".07"/>
+  <rect x="438" y="188" width="78" height="10" rx="5" fill="#FF7B22"/>
+  <rect x="438" y="206" width="140" height="8" rx="4" fill="#2B2023" fill-opacity=".12"/>
+  <rect x="438" y="220" width="104" height="8" rx="4" fill="#2B2023" fill-opacity=".08"/>
+
+  <!-- Карточка верхняя (акцентная) -->
+  <rect x="430" y="106" width="210" height="68" rx="20" fill="#D6F5EF" stroke="#0C9B89" stroke-opacity=".35" stroke-width="1.5"/>
+  <rect x="450" y="124" width="78" height="10" rx="5" fill="#0C9B89"/>
+  <rect x="450" y="142" width="116" height="8" rx="4" fill="#2B2023" fill-opacity=".12"/>
+  <rect x="450" y="156" width="86" height="8" rx="4" fill="#2B2023" fill-opacity=".08"/>
+</svg>
