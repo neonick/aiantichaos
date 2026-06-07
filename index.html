@@ -50,7 +50,7 @@
         radial-gradient(circle at 8% 10%, rgba(255, 123, 34, 0.22), transparent 22%),
         radial-gradient(circle at 88% 14%, rgba(12, 155, 137, 0.2), transparent 24%),
         radial-gradient(circle at 50% 100%, rgba(255, 216, 76, 0.26), transparent 30%),
-        linear-gradient(180deg, var(--bg) 0%, #fff4e4 44%, #fff9f2 100%);
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 38%, #ffe1bf 66%, #e9f8f3 100%);
       min-height: 100vh;
     }
 
@@ -602,6 +602,7 @@
 
     .accent-strip {
       margin-top: 20px;
+      margin-bottom: 20px;
       padding: 20px;
       border-radius: var(--radius-lg);
       background:
@@ -1194,6 +1195,27 @@
       width: 100%;
       border-radius: var(--radius-xl);
     }
+
+    .illo-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.86fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .illo-layout .cards-4,
+    .illo-layout .flow-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .illo-layout .section-illo {
+      margin: 0;
+      max-width: none;
+      height: 100%;
+    }
+    .illo-layout .section-illo img {
+      height: 100%;
+      object-fit: cover;
+    }
+
     @media (max-width: 640px) {
       .section-illo { margin-top: 24px; }
     }
@@ -1293,6 +1315,10 @@
     }
 
     @media (max-width: 1080px) {
+      .illo-layout {
+        grid-template-columns: 1fr;
+      }
+
       .hero-grid,
       .pilot-grid,
       .cards-4,
@@ -1316,6 +1342,7 @@
 
       .hero-grid,
       .pilot-grid,
+      .illo-layout,
       .cards-4,
       .cards-3,
       .compare-grid,
@@ -1643,6 +1670,7 @@
         <div class="section-head">
           <h2>Это вообще про тебя?</h2>
         </div>
+        <div class="illo-layout">
         <div class="cards-4">
           <article class="card signal">
             <span class="card-emoji" aria-hidden="true">
@@ -1691,6 +1719,7 @@
         <figure class="section-illo">
           <img src="assets/signals_chaos.svg" alt="Иллюстрация: пять карточек с хаотичными мыслями и задачами — типичный паттерн СДВГ-хаоса.">
         </figure>
+        </div>
       </div>
     </section>
 
@@ -1699,6 +1728,7 @@
         <div class="section-head">
           <h2>Что у тебя появится через 7 дней</h2>
         </div>
+        <div class="illo-layout">
         <div class="cards-4">
           <article class="card calm">
             <span class="card-emoji" aria-hidden="true">
@@ -1751,6 +1781,7 @@
         <figure class="section-illo">
           <img src="assets/build_result.svg" alt="Иллюстрация: слева хаотичные карточки, справа аккуратный стек — результат совместной работы.">
         </figure>
+        </div>
       </div>
     </section>
 
@@ -1856,7 +1887,7 @@
               </article>
               <article class="mode-art">
                 <div class="micro-label">Как это выглядит</div>
-                <h3>Proof и память вместо ощущения "я ничего не сделал"</h3>
+                <h3>Proof и память — видно, что реально было сделано</h3>
                 <img src="assets/proof_stack.svg" alt="Иллюстрация стека доказательств и памяти: обзор, заметки и следы проделанной работы.">
               </article>
             </div>
@@ -1873,6 +1904,7 @@
             Четыре шага. Никакого кваса и абстракций — конкретный маршрут от первого сообщения до рабочей схемы.
           </p>
         </div>
+        <div class="illo-layout">
         <div class="flow-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
           <article class="flow-card">
             <div class="step">01</div>
@@ -1898,6 +1930,7 @@
         <figure class="section-illo">
           <img src="assets/flow_timeline.svg" alt="Иллюстрация: четыре шага процесса — таймлайн от первого созвона до готовой схемы.">
         </figure>
+        </div>
       </div>
     </section>
 
@@ -2025,7 +2058,7 @@
           </article>
           <article class="faq-card">
             <h3>Что если у меня как раз сейчас плохая неделя?</h3>
-            <p>Это не минус. Наоборот: полезно смотреть не на красивую версию жизни, а на ту, где мозг шумит и всё сыпется. Под это и собирается система.</p>
+            <p>Это плюс. Полезно смотреть на жизнь, где мозг шумит и всё сыпется, — именно под неё и собирается система.</p>
           </article>
           <article class="faq-card">
             <h3>Почему к тебе, а не просто в ChatGPT самому?</h3>
