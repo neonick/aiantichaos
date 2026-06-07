@@ -259,7 +259,7 @@
     }
 
     h1 {
-      font-size: clamp(34px, 6vw, 76px);
+      font-size: clamp(32px, 5.4vw, 64px);
       margin-bottom: 18px;
     }
 
@@ -330,6 +330,10 @@
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
+    }
+
+    .copy-actions {
+      margin-top: 14px;
     }
 
     .btn {
@@ -521,6 +525,7 @@
 
     section {
       padding: 24px 0;
+      scroll-margin-top: 16px;
     }
 
     .section-head {
@@ -785,94 +790,6 @@
     }
 
     .care-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.58;
-    }
-
-    .battery-lab {
-      padding: 18px;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(235, 252, 247, 0.88) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .battery-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .battery-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      appearance: none;
-      background: rgba(255, 255, 255, 0.82);
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
-    }
-
-    .battery-tab:hover {
-      transform: translateY(-2px);
-    }
-
-    .battery-tab:focus-visible {
-      outline: 3px solid rgba(255, 216, 76, 0.78);
-      outline-offset: 4px;
-    }
-
-    .battery-tab.is-active {
-      background: linear-gradient(135deg, var(--teal) 0%, #18b39f 100%);
-      border-color: transparent;
-      color: #fffaf2;
-      box-shadow: 0 18px 30px rgba(12, 155, 137, 0.24);
-    }
-
-    .battery-panel {
-      display: none;
-    }
-
-    .battery-panel.is-active {
-      display: block;
-    }
-
-    .battery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .battery-card {
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .battery-card.accent {
-      background:
-        linear-gradient(135deg, rgba(255, 216, 76, 0.24) 0%, rgba(255, 123, 34, 0.16) 100%);
-    }
-
-    .battery-card h3 {
-      font-size: clamp(20px, 2.4vw, 28px);
-      margin-bottom: 10px;
-    }
-
-    .battery-card p {
       margin: 0;
       color: var(--muted);
       line-height: 1.58;
@@ -1227,7 +1144,6 @@
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .battery-panel.is-active,
     .mode-panel.is-active {
       animation: panel-in 0.28s ease both;
     }
@@ -1271,8 +1187,6 @@
 
     /* === Scroll reveal === */
     .reveal {
-      opacity: 0;
-      transform: translateY(14px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .reveal.is-visible {
@@ -1341,8 +1255,7 @@
     }
     @media (max-width: 760px) {
       .sticky-cta {
-        bottom: 16px;
-        right: 16px;
+        display: none;
       }
     }
 
@@ -1356,7 +1269,6 @@
       .faq-grid,
       .flow-grid,
       .care-grid,
-      .battery-grid,
       .art-grid,
       .mode-grid {
         grid-template-columns: 1fr 1fr;
@@ -1377,7 +1289,6 @@
       .faq-grid,
       .flow-grid,
       .care-grid,
-      .battery-grid,
       .art-grid,
       .mode-grid {
         grid-template-columns: 1fr;
@@ -1420,9 +1331,6 @@
         display: grid;
       }
 
-      .battery-tabs {
-        display: grid;
-      }
     }
   </style>
 </head>
@@ -1437,10 +1345,10 @@
           <div class="brand-title">AI-антихаос</div>
         </div>
         <nav class="nav">
-          <a href="#signals">Это про тебя?</a>
+          <a href="#pilot">Формат и цена</a>
           <a href="#build">Что получишь</a>
           <a href="#flow">Как проходит</a>
-          <a href="#pilot">Формат и цена</a>
+          <a href="#faq">FAQ</a>
           <a class="nav-cta" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">@neonick</a>
         </nav>
       </div>
@@ -1452,27 +1360,27 @@
       <div class="wrap hero-grid">
         <div class="hero-main floating-a">
           <div class="spotlight" aria-hidden="true"></div>
-          <h1>Когда мозг шумит, тебе нужен не курс. Тебе нужен вход.</h1>
+          <h1>AI-антихаос: внешняя опора, когда обычные системы не держатся.</h1>
           <p class="hero-lead">
-            За 7 дней собираем AI-опору под твою реальную жизнь: меньше в голове, легче старт, мягче возврат после выпадения.
+            За 7 дней собираем простую AI-схему под твою реальную жизнь: меньше держать в голове, легче стартовать и не собирать себя заново каждый день.
           </p>
           <div class="pulse-line">
             <span class="pulse-dot"></span>
-            Если у тебя сейчас туман: не надо изучать AI. Надо, чтобы стало чуть легче уже на этой неделе.
+            Пилот: 2 рабочих созвона + 7 дней связи. Первые 5 мест — 9 900 ₽.
           </div>
           <div class="hero-tags">
-            <div class="tag hot">2 созвона</div>
-            <div class="tag cool">7 дней допила</div>
-            <div class="tag">без техножаргона</div>
-            <div class="tag sun">без скучной продуктивности</div>
+            <div class="tag hot">9 900 ₽ / первые 5</div>
+            <div class="tag cool">диагноз не нужен</div>
+            <div class="tag">18+</div>
+            <div class="tag sun">не курс и не терапия</div>
             <div class="tag cool">можно голосом</div>
           </div>
           <div class="cta-row">
-            <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Хочу себе такую опору</a>
-            <a class="btn btn-secondary" href="#start">Если даже написать тяжело</a>
+            <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Написать @neonick</a>
+            <a class="btn btn-secondary" href="#start">Скопировать короткое сообщение</a>
           </div>
           <div class="hero-foot">
-            Просто напиши в Telegram: <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a> — коротко скажу, подходит ли формат.
+            Коротко поймём, подходит ли формат. Если не матч — скажу прямо.
           </div>
         </div>
 
@@ -1481,29 +1389,28 @@
             <div class="micro-label">Очень коротко</div>
             <h3>Если читаешь на бегу</h3>
             <ul class="quick-list">
-              <li>не лечение и не терапия;</li>
-              <li>не длинный курс;</li>
-              <li>цель: меньше хаоса, легче старт, мягче возврат.</li>
+              <li>не изучаем AI ради AI;</li>
+              <li>собираем внешний вход в твой хаос;</li>
+              <li>цель: меньше трения уже на этой неделе.</li>
             </ul>
           </article>
 
           <article class="sticky-card">
-            <div class="micro-label">Что станет легче</div>
-            <h3>Не идеальная жизнь. А меньше трения.</h3>
+            <div class="micro-label">Что покупаешь</div>
+            <h3>Не новую версию себя. А меньше ручного старта.</h3>
             <ul class="mini-list">
-              <li>меньше держать в голове;</li>
-              <li>быстрее понимать, что делать сегодня;</li>
-              <li>легче заходить в липкие задачи;</li>
-              <li>не начинать каждый день с полного нуля.</li>
+              <li>одно место для сброса каши;</li>
+              <li>3–5 сценариев под твои дела;</li>
+              <li>вход в день и липкие задачи;</li>
+              <li>сценарий возврата после выпадения.</li>
             </ul>
           </article>
 
           <article class="sticky-card">
-            <div class="micro-label">Кому подходит</div>
-            <h3>Если у тебя умная голова и вечный развал в делах</h3>
+            <div class="micro-label">Кому особенно</div>
+            <h3>Соло-спецам, креаторам и небольшим предпринимателям</h3>
             <p>
-              СДВГ или СДВГ-паттерны. Диагноз не нужен — нужно узнавание.
-              Особенно если красивые системы уже обещали спасти, но сдохли через несколько дней.
+              Особенно если хаос уже стоит денег, сроков или репутации, а красивые системы жили от двух до семи дней.
             </p>
           </article>
         </aside>
@@ -1523,6 +1430,9 @@
             <button class="copy-box" type="button" data-copy-box="Привет. У меня хаос в делах и трудный старт задач. Не очень понимаю, подходит ли мне твой формат. Можно коротко понять?" data-hint="нажми, чтобы скопировать">
               Привет. У меня хаос в делах и трудный старт задач. Не очень понимаю, подходит ли мне твой формат. Можно коротко понять?
             </button>
+            <div class="cta-row copy-actions">
+              <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Открыть Telegram</a>
+            </div>
           </article>
           <article class="card sun">
             <div class="card-top">дальше</div>
@@ -1551,6 +1461,68 @@
       </div>
     </section>
 
+    <section id="pilot">
+      <div class="wrap pilot-grid">
+        <article class="pilot-card">
+          <div class="section-head">
+            <h2>Формат и цена</h2>
+            <p>Живой пилот: собрать рабочую опору под твою жизнь, а не пройти ещё один курс.</p>
+          </div>
+          <ul class="pilot-list">
+            <li>входной матч-созвон 15–20 минут: быстро понять, подходит ли формат;</li>
+            <li>первый рабочий созвон 75–90 минут: смотрим реальный бардак и собираем первый тест;</li>
+            <li>7 дней связи и докрутки: одной строкой, голосом или скрином;</li>
+            <li>второй рабочий созвон 60–90 минут: режем лишнее и оставляем то, что держится;</li>
+            <li>минимум инструментов, максимум снижения трения.</li>
+          </ul>
+          <div class="pilot-chip-row">
+            <div class="pilot-chip">18+</div>
+            <div class="pilot-chip">ноутбук или компьютер</div>
+            <div class="pilot-chip">диагноз не нужен</div>
+            <div class="pilot-chip">техбэкграунд не нужен</div>
+            <div class="pilot-chip">можно без подготовки</div>
+            <div class="pilot-chip">камера не обязательна</div>
+            <div class="pilot-chip">можно без полного screen share</div>
+          </div>
+          <div class="fit-notes">
+            <div class="fit-note fit-ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>Подходит, если есть хаос, трудный старт задач и ощущение, что обычные системы требуют слишком много сил.</span>
+            </div>
+            <div class="fit-note fit-best">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>Особенно хорошо заходит соло-спецам, креаторам и небольшим предпринимателям — тем, у кого хаос уже стоит денег или сроков.</span>
+            </div>
+            <div class="fit-note fit-no">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6m0-6 6 6"/></svg>
+              <span>Не подходит, если хочется магии без участия, длинной школы или сложной системы сразу.</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="price-card">
+          <div class="micro-label">Стартовая цена</div>
+          <h3>Первые 5 мест</h3>
+          <div class="price-amount">9 900 ₽</div>
+          <p>Исследовательская цена первых кейсов. После них цена вырастет.</p>
+          <ul class="price-list">
+            <li>без длинных уроков;</li>
+            <li>без обязательной любви к технике;</li>
+            <li>без обещаний «починить жизнь»;</li>
+            <li>если формат не твой, я скажу это прямо.</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Написать @neonick</a>
+            <a class="btn btn-secondary" href="#faq">Сначала FAQ</a>
+          </div>
+          <p class="small-note">
+            Контакт для записи:
+            <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a>
+          </p>
+        </aside>
+      </div>
+    </section>
+
     <section id="trust">
       <div class="wrap">
         <div class="section-head">
@@ -1561,9 +1533,9 @@
         </div>
         <div class="proof-grid">
           <article class="proof-card">
-            <span class="stat">4+</span>
-            <h3>Параллельных проекта, самозанятость</h3>
-            <div class="proof-note">знаю изнутри, не по теории</div>
+            <span class="stat">15 лет</span>
+            <h3>Системной работы и фронтенда</h3>
+            <div class="proof-note">не коуч из воздуха</div>
           </article>
           <article class="proof-card">
             <span class="stat">168 / 372</span>
@@ -1571,123 +1543,11 @@
             <div class="proof-note">не «интересуюсь AI», а живу в этом</div>
           </article>
           <article class="proof-card">
-            <span class="stat">не demo</span>
-            <h3>Система работает на настоящих проектах</h3>
+            <span class="stat">4+</span>
+            <h3>Настоящих проекта, где это уже держится</h3>
             <p>На созвоне покажу вживую.</p>
             <div class="proof-note">реальные артефакты, не пустые слова</div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="battery">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Сколько у тебя сейчас батарейки?</h2>
-          <p>
-            Выбери уровень, который сейчас ближе, — и возьми только одно.
-          </p>
-        </div>
-        <div class="battery-lab">
-          <div class="battery-tabs" role="tablist" aria-label="Выбор по уровню ресурса">
-            <button class="battery-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="battery-low" tabindex="0" data-battery-target="low">
-              <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <rect x="4" y="8" width="14" height="8" rx="2"/>
-                <path d="M18 10h2v4h-2"/>
-                <path d="M7 10h2v4H7z"/>
-              </svg>
-              10% батарейки
-            </button>
-            <button class="battery-tab" type="button" role="tab" aria-selected="false" aria-controls="battery-mid" tabindex="-1" data-battery-target="mid">
-              <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <rect x="4" y="8" width="14" height="8" rx="2"/>
-                <path d="M18 10h2v4h-2"/>
-                <path d="M7 10h2v4H7zM10 10h2v4h-2z"/>
-              </svg>
-              30% батарейки
-            </button>
-            <button class="battery-tab" type="button" role="tab" aria-selected="false" aria-controls="battery-high" tabindex="-1" data-battery-target="high">
-              <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <rect x="4" y="8" width="14" height="8" rx="2"/>
-                <path d="M18 10h2v4h-2"/>
-                <path d="M7 10h2v4H7zM10 10h2v4h-2zM13 10h2v4h-2z"/>
-              </svg>
-              Есть силы
-            </button>
-          </div>
-
-          <div class="battery-panel is-active" id="battery-low" role="tabpanel" data-battery-panel="low">
-            <div class="battery-grid">
-              <article class="battery-card">
-                <div class="micro-label">Не надо</div>
-                <h3>Не пытайся сейчас всё понять</h3>
-                <p>Это как раз тот перегруз, который убираем.</p>
-              </article>
-              <article class="battery-card">
-                <div class="micro-label">Сделай только это</div>
-                <h3>Напиши одной строкой</h3>
-                <p>Напиши <strong>@neonick</strong>: «кажется, это про меня, но мало сил».</p>
-                <div class="pilot-chip-row">
-                  <div class="pilot-chip">1 строка</div>
-                  <div class="pilot-chip">можно голосом</div>
-                  <div class="pilot-chip">без подготовки</div>
-                </div>
-              </article>
-              <article class="battery-card accent">
-                <div class="micro-label">Дальше</div>
-                <h3>Следующий шаг будет маленьким</h3>
-                <p>Не квест на полчаса — пара коротких вопросов и ясный ответ.</p>
-                <div class="cta-row" style="margin-top: 16px;">
-                  <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Написать @neonick</a>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="battery-panel" id="battery-mid" role="tabpanel" data-battery-panel="mid">
-            <div class="battery-grid">
-              <article class="battery-card">
-                <div class="micro-label">Посмотри</div>
-                <h3>Хватит трёх мест</h3>
-                <p>«Про тебя?» → «Режимы» → FAQ. Остальное не нужно до решения написать.</p>
-              </article>
-              <article class="battery-card">
-                <div class="micro-label">Подготовь</div>
-                <h3>Один кусок реальной жизни</h3>
-                <p>Скрин хаоса, голосовое или один пример липкой задачи.</p>
-                <div class="pilot-chip-row">
-                  <div class="pilot-chip">1 скрин</div>
-                  <div class="pilot-chip">или 1 голосовое</div>
-                  <div class="pilot-chip">или 1 пример</div>
-                </div>
-              </article>
-              <article class="battery-card accent">
-                <div class="micro-label">Смысл</div>
-                <h3>Не изучать — проверить матч</h3>
-                <p>Снимет ли это часть трения в твоей реальной неделе?</p>
-              </article>
-            </div>
-          </div>
-
-          <div class="battery-panel" id="battery-high" role="tabpanel" data-battery-panel="high">
-            <div class="battery-grid">
-              <article class="battery-card">
-                <div class="micro-label">Изучи</div>
-                <h3>Посмотри режимы и proof</h3>
-                <p>«Режимы» и «Как это выглядит» дают картинку быстрее всего.</p>
-              </article>
-              <article class="battery-card">
-                <div class="micro-label">Принеси</div>
-                <h3>Один реальный узкий момент</h3>
-                <p>Не «в целом хаос», а одно живое: липкая задача, разваленное утро, плохая неделя.</p>
-              </article>
-              <article class="battery-card accent">
-                <div class="micro-label">Не скатывайся</div>
-                <h3>Не превращай это в исследование на 2 часа</h3>
-                <p>Если отклик есть — лучше написать, чем читать ещё час.</p>
-              </article>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -1918,7 +1778,7 @@
         <div class="section-head">
           <h2>Как это выглядит вживую</h2>
           <p>
-            Четыре шага. Никакого кваса и абстракций — конкретный маршрут от первого сообщения до рабочей схемы.
+            Четыре шага без теории ради теории — конкретный маршрут от первого сообщения до рабочей схемы.
           </p>
         </div>
         <div class="flow-grid">
@@ -1971,78 +1831,6 @@
             <div class="proof-note">меньше потери контекста</div>
           </article>
         </div>
-      </div>
-    </section>
-
-    <section id="pilot">
-      <div class="wrap pilot-grid">
-        <article class="pilot-card">
-          <div class="section-head">
-            <h2>Формат и цена</h2>
-            <p>Живой формат — собрать рабочую опору под твою жизнь.</p>
-          </div>
-          <ul class="pilot-list">
-            <li>первый созвон 75-90 минут;</li>
-            <li>второй созвон 60-90 минут;</li>
-            <li>7 дней связи и докрутки;</li>
-            <li>разбор твоих реальных задач, заметок и хаоса;</li>
-            <li>минимум инструментов, максимум пользы;</li>
-            <li>готовые сценарии под твою реальность.</li>
-          </ul>
-          <div class="pilot-chip-row">
-            <div class="pilot-chip">18+</div>
-            <div class="pilot-chip">ноутбук или компьютер</div>
-            <div class="pilot-chip">диагноз не нужен</div>
-            <div class="pilot-chip">техбэкграунд не нужен</div>
-            <div class="pilot-chip">можно без подготовки</div>
-            <div class="pilot-chip">камера не обязательна</div>
-            <div class="pilot-chip">можно без полного screen share</div>
-          </div>
-          <div class="fit-notes">
-            <div class="fit-note fit-ok">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-              <span>Подходит, если есть хаос, трудный старт задач и ощущение, что обычные системы требуют слишком много сил.</span>
-            </div>
-            <div class="fit-note fit-best">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <span>Особенно хорошо заходит соло-спецам, креаторам и небольшим предпринимателям — тем, у кого хаос уже стоит денег или сроков.</span>
-            </div>
-            <div class="fit-note fit-no">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6m0-6 6 6"/></svg>
-              <span>Не подходит, если хочется магии без участия, длинной школы или сложной системы сразу.</span>
-            </div>
-          </div>
-        </article>
-
-        <aside class="price-card">
-          <div class="micro-label">Стартовая цена</div>
-          <h3>Первые 5 мест</h3>
-          <div class="price-amount">9 900 ₽</div>
-          <p>Стартовая цена. После первых 5 кейсов вырастет.</p>
-          <ul class="price-list">
-            <li>без длинных уроков;</li>
-            <li>без обязательной любви к технике;</li>
-            <li>без обещаний «починить жизнь»;</li>
-            <li>без скучной продуктивности и инфоболтовни;</li>
-            <li>если формат не твой, я скажу это прямо.</li>
-          </ul>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Написать @neonick</a>
-            <a class="btn btn-secondary" href="#faq">Сначала посмотреть FAQ</a>
-          </div>
-          <p class="small-note">
-            Контакт для записи:
-            <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a>
-          </p>
-          <p class="small-note">
-            Для подкастов, эфиров, медиа и сообществ: тоже
-            <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a>
-          </p>
-          <p class="small-note">
-            Нужно больше поддержки или другой формат? Обсудим индивидуально —
-            <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a>
-          </p>
-        </aside>
       </div>
     </section>
 
@@ -2165,7 +1953,7 @@
 
       document.querySelectorAll(
         '.section-head, .cards-4, .cards-3, .compare-grid, .proof-grid, ' +
-        '.care-grid, .flow-grid, .battery-lab, .mode-lab, .pilot-grid, ' +
+        '.care-grid, .flow-grid, .mode-lab, .pilot-grid, ' +
         '.faq-grid, .accent-strip'
       ).forEach((el) => {
         el.classList.add('reveal');
@@ -2180,6 +1968,17 @@
         stickyCta.classList.toggle('is-visible', window.scrollY > 560);
       }, { passive: true });
     }
+
+    window.addEventListener('load', () => {
+      if (!window.location.hash) return;
+
+      const target = document.querySelector(window.location.hash);
+      if (!target) return;
+
+      window.setTimeout(() => {
+        target.scrollIntoView({ block: 'start', behavior: 'auto' });
+      }, 80);
+    });
 
     function setupTabs({ tabSelector, panelSelector, tabAttr, panelAttr }) {
       const tabs = Array.from(document.querySelectorAll(tabSelector));
@@ -2230,12 +2029,6 @@
       panelAttr: "data-mode-panel"
     });
 
-    setupTabs({
-      tabSelector: "[data-battery-target]",
-      panelSelector: "[data-battery-panel]",
-      tabAttr: "data-battery-target",
-      panelAttr: "data-battery-panel"
-    });
   </script>
 </body>
 </html>
