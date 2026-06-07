@@ -443,7 +443,6 @@
 
     .quick-card h3,
     .sticky-card h3,
-    .price-card h3,
     .pilot-card h3,
     .faq-card h3,
     .card h3 {
@@ -893,28 +892,12 @@
       pointer-events: none;
     }
 
-    .price-card::before {
-      content: "первые 5";
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 79, 109, 0.14);
-      color: #8b2335;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      transform: rotate(6deg);
-    }
-
     .price-amount {
       font-family: "Unbounded", sans-serif;
       font-size: clamp(42px, 7vw, 70px);
       line-height: 0.95;
       letter-spacing: -0.06em;
-      margin: 10px 0 14px;
+      margin: 0 0 14px;
     }
 
     .small-note {
@@ -1333,10 +1316,8 @@
         </article>
 
         <aside class="price-card">
-          <div class="micro-label">Стартовая цена</div>
-          <h3>Первые 5 мест</h3>
           <div class="price-amount">9 900 ₽</div>
-          <p>Исследовательская цена первых кейсов. После них цена вырастет.</p>
+          <p><strong>Первые 5 мест.</strong> Дальше цена выше.</p>
           <ul class="price-list">
             <li>без длинных уроков;</li>
             <li>без обязательной любви к технике;</li>
