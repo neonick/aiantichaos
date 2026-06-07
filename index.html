@@ -1186,38 +1186,6 @@
     .faq-grid .faq-card:nth-child(5) { transition-delay: 320ms; }
     .faq-grid .faq-card:nth-child(6) { transition-delay: 400ms; }
 
-    /* === Section illustration === */
-    .section-illo {
-      margin: 28px 0 0;
-      max-width: 720px;
-    }
-    .section-illo img {
-      width: 100%;
-      border-radius: var(--radius-xl);
-    }
-
-    .illo-bg {
-      position: relative;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      isolation: isolate;
-      padding: 20px;
-    }
-    .illo-bg .section-illo {
-      position: absolute;
-      inset: 0;
-      margin: 0;
-      max-width: none;
-      z-index: -1;
-      background-size: cover;
-      background-position: center;
-      opacity: .4;
-    }
-
-    @media (max-width: 640px) {
-      .section-illo { margin-top: 24px; }
-    }
-
     /* === Card icon === */
     .card-emoji {
       width: 38px;
@@ -1663,7 +1631,6 @@
         <div class="section-head">
           <h2>Это вообще про тебя?</h2>
         </div>
-        <div class="illo-bg">
         <div class="cards-4">
           <article class="card signal">
             <span class="card-emoji" aria-hidden="true">
@@ -1709,8 +1676,6 @@
             <p>Сам процесс "разобраться что делать" съедает всю энергию.</p>
           </article>
         </div>
-        <figure class="section-illo" style="background-image: url('assets/signals_chaos.svg')" aria-hidden="true"></figure>
-        </div>
       </div>
     </section>
 
@@ -1719,7 +1684,6 @@
         <div class="section-head">
           <h2>Что у тебя появится через 7 дней</h2>
         </div>
-        <div class="illo-bg">
         <div class="cards-4">
           <article class="card calm">
             <span class="card-emoji" aria-hidden="true">
@@ -1768,8 +1732,6 @@
             <h3>Сценарий после выпадения</h3>
             <p>Система должна помогать мягко вернуться, а не умирать.</p>
           </article>
-        </div>
-        <figure class="section-illo" style="background-image: url('assets/build_result.svg')" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
@@ -1893,7 +1855,6 @@
             Четыре шага. Никакого кваса и абстракций — конкретный маршрут от первого сообщения до рабочей схемы.
           </p>
         </div>
-        <div class="illo-bg">
         <div class="flow-grid">
           <article class="flow-card">
             <div class="step">01</div>
@@ -1915,8 +1876,6 @@
             <h3>Второй рабочий созвон — 60–90 минут</h3>
             <p>Режем лишнее, усиливаем то, что держится. Уходишь со списком: что оставить, что убрать.</p>
           </article>
-        </div>
-        <figure class="section-illo" style="background-image: url('assets/flow_timeline.svg')" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
