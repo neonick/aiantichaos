@@ -197,7 +197,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.12fr) minmax(310px, 0.88fr);
       gap: 18px;
-      align-items: stretch;
+      align-items: start;
     }
 
     .hero-main,
@@ -205,9 +205,7 @@
     .card,
     .faq-card,
     .pilot-card,
-    .price-card,
-    .proof-card,
-    .compare-card {
+    .price-card {
       background: var(--paper);
       border: 1px solid rgba(255, 255, 255, 0.92);
       box-shadow: var(--shadow-lg);
@@ -487,9 +485,7 @@
     .price-card h3,
     .pilot-card h3,
     .faq-card h3,
-    .proof-card h3,
-    .card h3,
-    .compare-card h3 {
+    .card h3 {
       font-size: clamp(20px, 2.5vw, 28px);
       margin-bottom: 10px;
     }
@@ -499,9 +495,7 @@
     .pilot-card p,
     .price-card p,
     .faq-card p,
-    .proof-card p,
-    .card p,
-    .compare-card p {
+    .card p {
       margin: 0;
       color: var(--muted);
       line-height: 1.55;
@@ -552,23 +546,20 @@
     }
 
     .cards-3,
-    .compare-grid,
-    .proof-grid,
     .faq-grid {
       display: grid;
       gap: 16px;
     }
 
-    .cards-3,
-    .compare-grid,
-    .proof-grid,
-    .faq-grid {
+    .cards-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .card,
-    .compare-card,
-    .proof-card,
     .faq-card,
     .pilot-card,
     .price-card {
@@ -672,40 +663,6 @@
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 18px 34px rgba(12, 155, 137, 0.24);
     }
 
-    .compare-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .compare-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 6px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--orange) 0%, var(--teal) 100%);
-    }
-
-    .compare-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(22, 20, 23, 0.06);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .proof-card {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 246, 232, 0.92) 100%);
-    }
-
     .stat {
       display: block;
       margin-bottom: 10px;
@@ -713,17 +670,6 @@
       font-size: clamp(28px, 4vw, 44px);
       line-height: 0.95;
       letter-spacing: -0.06em;
-    }
-
-    .proof-note {
-      margin-top: 14px;
-      display: inline-flex;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 123, 34, 0.12);
-      color: #8f4300;
-      font-size: 13px;
-      font-weight: 700;
     }
 
     .trust-panel {
@@ -807,129 +753,6 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.55;
-    }
-
-    .friction-map {
-      display: grid;
-      gap: 14px;
-    }
-
-    .friction-row {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    .friction-card,
-    .support-card {
-      position: relative;
-      overflow: hidden;
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .friction-card {
-      background:
-        linear-gradient(170deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 217, 224, 0.34) 100%);
-    }
-
-    .support-card {
-      background:
-        linear-gradient(170deg, rgba(255, 255, 255, 0.9) 0%, rgba(214, 245, 239, 0.46) 100%);
-    }
-
-    .friction-card h3,
-    .support-card h3 {
-      font-size: clamp(22px, 3vw, 34px);
-      margin-bottom: 10px;
-    }
-
-    .friction-card p,
-    .support-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.58;
-    }
-
-    .support-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 7px;
-      background: linear-gradient(180deg, var(--teal) 0%, var(--yellow) 100%);
-    }
-
-    .flow-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      align-items: start;
-    }
-
-    .flow-card {
-      position: relative;
-      overflow: hidden;
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      background: var(--paper-strong);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-      min-height: 100%;
-    }
-
-    .flow-card::before {
-      content: "";
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      right: -54px;
-      top: -56px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 123, 34, 0.16), transparent 72%);
-      pointer-events: none;
-    }
-
-    .flow-card::after {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      left: -70px;
-      bottom: -80px;
-      border-radius: 42px;
-      transform: rotate(24deg);
-      background: rgba(12, 155, 137, 0.08);
-      pointer-events: none;
-    }
-
-
-    .care-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .care-card {
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(244, 255, 251, 0.82) 100%);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .care-card h3 {
-      font-size: clamp(20px, 2.5vw, 28px);
-      margin-bottom: 10px;
-    }
-
-    .care-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.58;
     }
 
     .mode-lab {
@@ -1030,22 +853,6 @@
       font-size: 14px;
       color: var(--muted);
       line-height: 1.58;
-    }
-
-    .step {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
-      margin-bottom: 14px;
-      background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
-      color: #fffaf2;
-      font-family: "Unbounded", sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      transform: rotate(-6deg);
     }
 
     .pilot-grid {
@@ -1233,12 +1040,10 @@
     }
 
     /* === Hover lifts === */
-    .card, .compare-card, .proof-card, .faq-card, .care-card, .flow-card,
-    .friction-card, .support-card {
+    .card, .faq-card {
       transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
-    .card:hover, .compare-card:hover, .proof-card:hover, .faq-card:hover,
-    .care-card:hover, .flow-card:hover, .friction-card:hover, .support-card:hover {
+    .card:hover, .faq-card:hover {
       transform: translateY(-5px) !important;
       box-shadow: 0 34px 80px rgba(22, 20, 23, 0.16);
     }
@@ -1286,25 +1091,14 @@
       animation: panel-in 0.28s ease both;
     }
 
-    /* === Stat counter pop === */
-    @keyframes stat-pop {
-      from { opacity: 0; transform: scale(0.72) translateY(10px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .proof-card.is-visible .stat {
-      animation: stat-pop 0.55s cubic-bezier(.22,.68,0,1.3) both;
-    }
-
     /* === Stagger для карточек === */
     .cards-3 .card:nth-child(1),
-    .proof-grid .proof-card:nth-child(1), .faq-grid .faq-card:nth-child(1) { transition-delay: 0ms; }
+    .faq-grid .faq-card:nth-child(1) { transition-delay: 0ms; }
     .cards-3 .card:nth-child(2),
-    .proof-grid .proof-card:nth-child(2), .faq-grid .faq-card:nth-child(2) { transition-delay: 80ms; }
+    .faq-grid .faq-card:nth-child(2) { transition-delay: 80ms; }
     .cards-3 .card:nth-child(3),
-    .proof-grid .proof-card:nth-child(3), .faq-grid .faq-card:nth-child(3) { transition-delay: 160ms; }
+    .faq-grid .faq-card:nth-child(3) { transition-delay: 160ms; }
     .faq-grid .faq-card:nth-child(4) { transition-delay: 240ms; }
-    .faq-grid .faq-card:nth-child(5) { transition-delay: 320ms; }
-    .faq-grid .faq-card:nth-child(6) { transition-delay: 400ms; }
 
     /* === Scroll reveal === */
     .reveal {
@@ -1338,26 +1132,6 @@
       z-index: 1;
     }
 
-    /* === Icon badges === */
-    .care-icon,
-    .flow-icon {
-      display: block;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 14px;
-      padding: 9px;
-      border-radius: 14px;
-      flex-shrink: 0;
-    }
-    .care-icon {
-      background: linear-gradient(135deg, rgba(12,155,137,0.13) 0%, rgba(255,216,76,0.16) 100%);
-      color: var(--teal);
-    }
-    .flow-icon {
-      background: linear-gradient(135deg, rgba(255,123,34,0.14) 0%, rgba(255,216,76,0.2) 100%);
-      color: var(--orange-deep);
-    }
-
     /* === Sticky CTA === */
     .sticky-cta {
       position: fixed;
@@ -1384,11 +1158,7 @@
       .hero-grid,
       .pilot-grid,
       .cards-3,
-      .compare-grid,
-      .proof-grid,
       .faq-grid,
-      .flow-grid,
-      .care-grid,
       .art-grid,
       .mode-grid {
         grid-template-columns: 1fr 1fr;
@@ -1407,32 +1177,22 @@
       .hero-grid,
       .pilot-grid,
       .cards-3,
-      .compare-grid,
-      .proof-grid,
       .faq-grid,
-      .flow-grid,
-      .care-grid,
       .art-grid,
       .mode-grid {
         grid-template-columns: 1fr;
       }
 
-      .trust-panel,
-      .friction-row {
+      .trust-panel {
         grid-template-columns: 1fr;
       }
 
       .hero-main,
       .hero-side,
       .card,
-      .compare-card,
-      .proof-card,
       .faq-card,
       .pilot-card,
       .price-card,
-      .flow-card,
-      .friction-card,
-      .support-card,
       .trust-panel,
       .trust-stat {
         padding: 18px;
@@ -1454,8 +1214,7 @@
 
       .quick-card,
       .sticky-card,
-      .card,
-      .proof-card {
+      .card {
         transform: none !important;
       }
 
@@ -1478,8 +1237,7 @@
         </div>
         <nav class="nav">
           <a href="#pilot">Формат и цена</a>
-          <a href="#build">Что получишь</a>
-          <a href="#flow">Как проходит</a>
+          <a href="#modes">Где ломается</a>
           <a href="#faq">FAQ</a>
           <a class="nav-cta" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">@neonick</a>
         </nav>
@@ -1538,13 +1296,6 @@
             </ul>
           </article>
 
-          <article class="sticky-card">
-            <div class="micro-label">Кому особенно</div>
-            <h3>Соло-спецам, креаторам и небольшим предпринимателям</h3>
-            <p>
-              Особенно если хаос уже стоит денег, сроков или репутации, а красивые системы жили от двух до семи дней.
-            </p>
-          </article>
         </aside>
       </div>
     </section>
@@ -1691,91 +1442,11 @@
       </div>
     </section>
 
-    <section id="build">
-      <div class="wrap">
-        <span id="signals" class="anchor-target" aria-hidden="true"></span>
-        <div class="section-head">
-          <h2>Где ломается день — и что появится вместо этого</h2>
-          <p>
-            Не отдельный список симптомов и отдельный список фич. Каждая штука собирается под конкретное место, где сейчас вязнет жизнь.
-          </p>
-        </div>
-        <div class="friction-map">
-          <article class="friction-row">
-            <div class="friction-card">
-              <div class="micro-label">Сейчас</div>
-              <h3>Знаешь, что надо делать, но не можешь начать</h3>
-              <p>Задача липкая, туманная, без точки входа. Мозг отталкивается ещё до старта.</p>
-            </div>
-            <div class="support-card">
-              <div class="micro-label">Собираем</div>
-              <h3>Первый ход вместо пустого экрана</h3>
-              <p>AI-сценарий режет задачу до микродвижения и вытаскивает один нормальный вход.</p>
-              <div class="pilot-chip-row">
-                <div class="pilot-chip">1 микрошаг</div>
-                <div class="pilot-chip">без героизма</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="friction-row">
-            <div class="friction-card">
-              <div class="micro-label">Сейчас</div>
-              <h3>Всё где-то записано, но ясности ноль</h3>
-              <p>Чаты, заметки, вкладки. Всё есть — ничего не собирается в картину.</p>
-            </div>
-            <div class="support-card">
-              <div class="micro-label">Собираем</div>
-              <h3>Одно место для выгрузки хаоса</h3>
-              <p>Не по 17 местам: один понятный вход, куда можно сбросить кашу текстом, голосом или скрином.</p>
-              <div class="pilot-chip-row">
-                <div class="pilot-chip">голос ок</div>
-                <div class="pilot-chip">скрин ок</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="friction-row">
-            <div class="friction-card">
-              <div class="micro-label">Сейчас</div>
-              <h3>Утро начинается с вопроса «что вообще делать?»</h3>
-              <p>Организация стала отдельной задачей и съедает ресурс до первого действия.</p>
-            </div>
-            <div class="support-card">
-              <div class="micro-label">Собираем</div>
-              <h3>Понятный вход в день</h3>
-              <p>Система сужает поле до 1–3 живых задач и помогает выбрать следующий шаг без плана на всю жизнь.</p>
-              <div class="pilot-chip-row">
-                <div class="pilot-chip">1 фокус</div>
-                <div class="pilot-chip">без перегруза</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="friction-row">
-            <div class="friction-card">
-              <div class="micro-label">Сейчас</div>
-              <h3>Выпал на день — всё рассыпается</h3>
-              <p>Обычная система живёт только в хорошую неделю и не умеет переживать сбой.</p>
-            </div>
-            <div class="support-card">
-              <div class="micro-label">Собираем</div>
-              <h3>Сценарий возврата без полного нуля</h3>
-              <p>Вытаскиваем контекст, смотрим, что ещё держится, и возвращаем один слой, а не всю жизнь сразу.</p>
-              <div class="pilot-chip-row">
-                <div class="pilot-chip">мягкий возврат</div>
-                <div class="pilot-chip">без стыда</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section id="modes">
       <div class="wrap">
         <div class="section-head">
           <h2>Где у тебя чаще всего ломается день?</h2>
+          <p>Выбери один сценарий. Этого достаточно, чтобы понять, что именно будем собирать.</p>
         </div>
         <div class="mode-lab">
           <div class="mode-tabs" role="tablist" aria-label="Режимы работы">
@@ -1809,10 +1480,9 @@
                 <h3>Когда утром мозг уже устал от выбора</h3>
                 <p>День ломается до первого действия — слишком много шума на входе.</p>
                 <ul class="mode-list">
-                  <li>сужаем поле до 1-3 реально живых задач;</li>
-                  <li>достаём один понятный первый шаг вместо плана на всю жизнь;</li>
-                  <li>можно начать голосом, если текста в голове нет;</li>
-                  <li>утро не превращается в отдельную тяжёлую работу.</li>
+                  <li>сужаем поле до 1-3 живых задач;</li>
+                  <li>достаём один следующий шаг;</li>
+                  <li>можно начать голосом.</li>
                 </ul>
                 <div class="pilot-chip-row">
                   <div class="pilot-chip">1 вопрос</div>
@@ -1835,10 +1505,9 @@
                 <h3>Когда задача липкая и смотреть на неё противно</h3>
                 <p>Проблема не в мотивации — в вязкости. Мозг отталкивается ещё до старта.</p>
                 <ul class="mode-list">
-                  <li>режем задачу до микродвижения, а не до идеального плана;</li>
-                  <li>убираем пустые «надо заняться» и заменяем на действие;</li>
-                  <li>делаем сценарий, который не требует героизма;</li>
-                  <li>оставляем только то, что реально помогает зайти внутрь.</li>
+                  <li>режем задачу до микродвижения;</li>
+                  <li>убираем пустое «надо заняться»;</li>
+                  <li>делаем вход без героизма.</li>
                 </ul>
                 <div class="pilot-chip-row">
                   <div class="pilot-chip">анти-вязкость</div>
@@ -1861,10 +1530,9 @@
                 <h3>Когда неделя поехала, и уже не хочется даже открывать систему</h3>
                 <p>Хорошая опора нужна именно для плохой недели.</p>
                 <ul class="mode-list">
-                  <li>вытаскиваем живой контекст без самогаза;</li>
-                  <li>смотрим, что ещё держится и за что можно зацепиться;</li>
-                  <li>возвращаем не всю жизнь сразу, а один реальный слой;</li>
-                  <li>делаем систему, которая умеет переживать сбой.</li>
+                  <li>вытаскиваем контекст без самогаза;</li>
+                  <li>смотрим, что ещё держится;</li>
+                  <li>возвращаем один слой, а не всю жизнь.</li>
                 </ul>
                 <div class="pilot-chip-row">
                   <div class="pilot-chip">мягкий возврат</div>
@@ -1883,74 +1551,12 @@
       </div>
     </section>
 
-    <section id="flow">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Как это выглядит вживую</h2>
-          <p>
-            Четыре шага без теории ради теории — конкретный маршрут от первого сообщения до рабочей схемы.
-          </p>
-        </div>
-        <div class="flow-grid">
-          <article class="flow-card">
-            <div class="step">01</div>
-            <h3>Входной созвон — 15–20 минут</h3>
-            <p>Несколько коротких вопросов про хаос. Если не матч — скажу прямо.</p>
-          </article>
-          <article class="flow-card">
-            <div class="step">02</div>
-            <h3>Первый рабочий созвон — 75–90 минут</h3>
-            <p>Смотрю твой реальный бардак, показываю живую систему. Уходишь с одним тестом, не с домашкой.</p>
-          </article>
-          <article class="flow-card">
-            <div class="step">03</div>
-            <h3>7 дней теста</h3>
-            <p>Пробуешь на реальных делах. Я рядом — одной строкой или голосовым.</p>
-          </article>
-          <article class="flow-card">
-            <div class="step">04</div>
-            <h3>Второй рабочий созвон — 60–90 минут</h3>
-            <p>Режем лишнее, усиливаем то, что держится. Уходишь со списком: что оставить, что убрать.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Это уже живёт, а не рисуется на словах</h2>
-          <p>
-            На созвоне можно показать не слова, а реальные куски: AI как weekly review, голос → структура, рабочая память и несколько сценариев под твои задачи.
-          </p>
-        </div>
-        <div class="proof-grid">
-          <article class="proof-card">
-            <h3>Weekly review вместо «я ничего не сделал»</h3>
-            <p>5–10 минут — картина недели по фактам, а не по тревоге.</p>
-            <div class="proof-note">меньше самогаза</div>
-          </article>
-          <article class="proof-card">
-            <h3>Голос вместо борьбы с пустым экраном</h3>
-            <p>Говоришь как есть — получаешь структуру.</p>
-            <div class="proof-note">меньше трения на входе</div>
-          </article>
-          <article class="proof-card">
-            <h3>Память вместо «где это вообще было?»</h3>
-            <p>Контекст достать за секунду — покажу на реальных проектах.</p>
-            <div class="proof-note">меньше потери контекста</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section id="faq">
       <div class="wrap">
         <div class="section-head">
           <h2>FAQ</h2>
           <p>
-            Если от слова «система» уже подташнивает, это как раз нормально.
-            Весь смысл здесь в том, чтобы не навесить на тебя ещё один тяжёлый слой.
+            Коротко про главные сомнения перед тем, как написать.
           </p>
         </div>
         <div class="faq-grid">
@@ -1967,16 +1573,8 @@
             <p>Тем более. Здесь задача не навесить ещё один слой контроля, а убрать лишнее и оставить только то, что реально снижает трение.</p>
           </article>
           <article class="faq-card">
-            <h3>Что если у меня как раз сейчас плохая неделя?</h3>
-            <p>Это плюс. Полезно смотреть на жизнь, где мозг шумит и всё сыпется, — именно под неё и собирается система.</p>
-          </article>
-          <article class="faq-card">
             <h3>Почему к тебе, а не просто в ChatGPT самому?</h3>
             <p>ChatGPT у многих уже есть. Ценность — в схеме, которая держится на твоей реальной неделе.</p>
-          </article>
-          <article class="faq-card">
-            <h3>Это дорого для меня сейчас.</h3>
-            <p>Честная реакция. 9 900 ₽ — стартовая цена именно потому, что продукт живой и я собираю первые кейсы. Если сейчас не момент финансово, можно подписаться на <a href="https://t.me/neiro_orien" target="_blank" rel="noopener noreferrer">@neiro_orien</a> и вернуться позже — формат никуда не денется.</p>
           </article>
         </div>
       </div>
@@ -2062,8 +1660,7 @@
       }, { threshold: 0.1 });
 
       document.querySelectorAll(
-        '.section-head, .cards-3, .compare-grid, .proof-grid, ' +
-        '.care-grid, .flow-grid, .friction-map, .mode-lab, .pilot-grid, .trust-panel, ' +
+        '.section-head, .cards-3, .mode-lab, .pilot-grid, .trust-panel, ' +
         '.faq-grid, .accent-strip'
       ).forEach((el) => {
         el.classList.add('reveal');
