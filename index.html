@@ -1196,24 +1196,22 @@
       border-radius: var(--radius-xl);
     }
 
-    .illo-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.86fr);
-      gap: 18px;
-      align-items: stretch;
+    .illo-bg {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      isolation: isolate;
+      padding: 20px;
     }
-    .illo-layout .cards-4,
-    .illo-layout .flow-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .illo-layout .section-illo {
+    .illo-bg .section-illo {
+      position: absolute;
+      inset: 0;
       margin: 0;
       max-width: none;
-      height: 100%;
-    }
-    .illo-layout .section-illo img {
-      height: 100%;
-      object-fit: cover;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+      opacity: .4;
     }
 
     @media (max-width: 640px) {
@@ -1315,10 +1313,6 @@
     }
 
     @media (max-width: 1080px) {
-      .illo-layout {
-        grid-template-columns: 1fr;
-      }
-
       .hero-grid,
       .pilot-grid,
       .cards-4,
@@ -1342,7 +1336,6 @@
 
       .hero-grid,
       .pilot-grid,
-      .illo-layout,
       .cards-4,
       .cards-3,
       .compare-grid,
@@ -1670,7 +1663,7 @@
         <div class="section-head">
           <h2>Это вообще про тебя?</h2>
         </div>
-        <div class="illo-layout">
+        <div class="illo-bg">
         <div class="cards-4">
           <article class="card signal">
             <span class="card-emoji" aria-hidden="true">
@@ -1716,9 +1709,7 @@
             <p>Сам процесс "разобраться что делать" съедает всю энергию.</p>
           </article>
         </div>
-        <figure class="section-illo">
-          <img src="assets/signals_chaos.svg" alt="Иллюстрация: пять карточек с хаотичными мыслями и задачами — типичный паттерн СДВГ-хаоса.">
-        </figure>
+        <figure class="section-illo" style="background-image: url('assets/signals_chaos.svg')" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
@@ -1728,7 +1719,7 @@
         <div class="section-head">
           <h2>Что у тебя появится через 7 дней</h2>
         </div>
-        <div class="illo-layout">
+        <div class="illo-bg">
         <div class="cards-4">
           <article class="card calm">
             <span class="card-emoji" aria-hidden="true">
@@ -1778,9 +1769,7 @@
             <p>Система должна помогать мягко вернуться, а не умирать.</p>
           </article>
         </div>
-        <figure class="section-illo">
-          <img src="assets/build_result.svg" alt="Иллюстрация: слева хаотичные карточки, справа аккуратный стек — результат совместной работы.">
-        </figure>
+        <figure class="section-illo" style="background-image: url('assets/build_result.svg')" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
@@ -1904,8 +1893,8 @@
             Четыре шага. Никакого кваса и абстракций — конкретный маршрут от первого сообщения до рабочей схемы.
           </p>
         </div>
-        <div class="illo-layout">
-        <div class="flow-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+        <div class="illo-bg">
+        <div class="flow-grid">
           <article class="flow-card">
             <div class="step">01</div>
             <h3>Входной созвон — 15–20 минут</h3>
@@ -1927,9 +1916,7 @@
             <p>Режем лишнее, усиливаем то, что держится. Уходишь со списком: что оставить, что убрать.</p>
           </article>
         </div>
-        <figure class="section-illo">
-          <img src="assets/flow_timeline.svg" alt="Иллюстрация: четыре шага процесса — таймлайн от первого созвона до готовой схемы.">
-        </figure>
+        <figure class="section-illo" style="background-image: url('assets/flow_timeline.svg')" aria-hidden="true"></figure>
         </div>
       </div>
     </section>
