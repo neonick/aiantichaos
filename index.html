@@ -722,19 +722,45 @@
 
     .flow-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
       align-items: start;
     }
 
     .flow-card {
       position: relative;
+      overflow: hidden;
       padding: 22px;
       border-radius: var(--radius-lg);
       background: var(--paper-strong);
       border: 1px solid rgba(22, 20, 23, 0.08);
       box-shadow: var(--shadow-md);
       min-height: 100%;
+    }
+
+    .flow-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -54px;
+      top: -56px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 123, 34, 0.16), transparent 72%);
+      pointer-events: none;
+    }
+
+    .flow-card::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      left: -70px;
+      bottom: -80px;
+      border-radius: 42px;
+      transform: rotate(24deg);
+      background: rgba(12, 155, 137, 0.08);
+      pointer-events: none;
     }
 
 
