@@ -248,20 +248,6 @@
       pointer-events: none;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: var(--yellow-soft);
-      color: #6e5511;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 18px;
-      box-shadow: inset 0 0 0 1px rgba(110, 85, 17, 0.08);
-    }
-
     h1,
     h2,
     h3,
@@ -300,6 +286,7 @@
     .pulse-dot {
       width: 10px;
       height: 10px;
+      flex-shrink: 0;
       border-radius: 50%;
       background: currentColor;
       animation: pulse 1.8s ease-in-out infinite;
@@ -476,14 +463,6 @@
       pointer-events: none;
     }
 
-    .quick-card {
-      transform: rotate(-1.2deg);
-    }
-
-    .sticky-card {
-      transform: rotate(1.1deg);
-    }
-
     .micro-label {
       display: inline-flex;
       align-items: center;
@@ -589,16 +568,6 @@
     .price-card {
       border-radius: var(--radius-lg);
       padding: 22px;
-    }
-
-    .card:nth-child(2n),
-    .proof-card:nth-child(2n) {
-      transform: rotate(-0.9deg);
-    }
-
-    .card:nth-child(2n + 1),
-    .proof-card:nth-child(2n + 1) {
-      transform: rotate(0.8deg);
     }
 
     .card-top {
@@ -1036,7 +1005,7 @@
     }
 
     .price-card::before {
-      content: "пилот";
+      content: "первые 5";
       position: absolute;
       top: 18px;
       right: 18px;
@@ -1218,7 +1187,7 @@
 
     /* === Section illustration === */
     .section-illo {
-      margin: 40px auto 0;
+      margin: 28px 0 0;
       max-width: 720px;
     }
     .section-illo img {
@@ -1229,14 +1198,22 @@
       .section-illo { margin-top: 24px; }
     }
 
-    /* === Card emoji icon === */
+    /* === Card icon === */
     .card-emoji {
-      font-size: 38px;
-      line-height: 1;
+      width: 38px;
+      height: 38px;
       margin-bottom: 14px;
       display: block;
       filter: drop-shadow(0 4px 8px rgba(22,20,23,0.10));
     }
+    .card-emoji svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .card.signal .card-emoji { color: var(--berry); }
+    .card.calm .card-emoji { color: var(--teal); }
+    .card.sun .card-emoji { color: var(--orange-deep); }
 
     /* === Scroll reveal === */
     .reveal {
@@ -1262,7 +1239,6 @@
       background: radial-gradient(380px circle at var(--mx) var(--my), rgba(255,123,34,0.13), transparent 65%);
       z-index: 0;
     }
-    .hero-main > .eyebrow,
     .hero-main > h1,
     .hero-main > .hero-lead,
     .hero-main > .pulse-line,
@@ -1422,7 +1398,6 @@
       <div class="wrap hero-grid">
         <div class="hero-main floating-a">
           <div class="spotlight" aria-hidden="true"></div>
-          <div class="eyebrow">Для людей с СДВГ-мозгом, у которых красивые системы живут три дня</div>
           <h1>Когда мозг шумит, тебе нужен не курс. Тебе нужен вход.</h1>
           <p class="hero-lead">
             За 7 дней собираем AI-опору под твою реальную жизнь: меньше в голове, легче старт, мягче возврат после выпадения.
@@ -1525,7 +1500,7 @@
     <section id="trust">
       <div class="wrap">
         <div class="section-head">
-          <h2>Почему это не воздух</h2>
+          <h2>Почему мне можно верить</h2>
         </div>
         <div class="accent-strip">
           <strong>Ник Марченко.</strong> СДВГ диагностирован. AI — первое, что реально держится, а не красиво выглядит три дня.
@@ -1545,7 +1520,7 @@
             <span class="stat">не demo</span>
             <h3>Система работает на настоящих проектах</h3>
             <p>На созвоне покажу вживую.</p>
-            <div class="proof-note">реальные артефакты, не воздух</div>
+            <div class="proof-note">реальные артефакты, не пустые слова</div>
           </article>
         </div>
       </div>
@@ -1556,7 +1531,7 @@
         <div class="section-head">
           <h2>Сколько у тебя сейчас батарейки?</h2>
           <p>
-            Этот лендинг не надо читать весь. Выбери уровень, который сейчас ближе, — и возьми только одно.
+            Выбери уровень, который сейчас ближе, — и возьми только одно.
           </p>
         </div>
         <div class="battery-lab">
@@ -1670,22 +1645,45 @@
         </div>
         <div class="cards-4">
           <article class="card signal">
-            <span class="card-emoji">⚡</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M22 6 12 23h7l-2 11 11-17h-7l1-11Z"/>
+              </svg>
+            </span>
             <h3>Знаешь, что надо делать, но не можешь начать</h3>
             <p>Задача липкая, туманная, без точки входа.</p>
           </article>
           <article class="card calm">
-            <span class="card-emoji">🌀</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M20 20a4 4 0 1 1 4-4"/>
+                <path d="M20 20a9 9 0 1 1-9-9"/>
+                <path d="M20 20a14 14 0 0 0 14-14"/>
+              </svg>
+            </span>
             <h3>Всё где-то записано, но ясности ноль</h3>
             <p>Чаты, заметки, вкладки. Всё есть — ничего не собирается.</p>
           </article>
           <article class="card sun">
-            <span class="card-emoji">🔋</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                <rect x="7" y="13" width="22" height="15" rx="3.5"/>
+                <path d="M32 18v5"/>
+                <rect x="10.5" y="16.5" width="9" height="8" rx="1.5" fill="currentColor" stroke="none" fill-opacity=".9"/>
+              </svg>
+            </span>
             <h3>Выпал на день — всё рассыпается</h3>
             <p>Система не умеет переживать сбой и возвращаться.</p>
           </article>
           <article class="card signal">
-            <span class="card-emoji">🌪</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M8 11h24"/>
+                <path d="M11 18.5h17"/>
+                <path d="M14.5 26h10"/>
+                <path d="M18 33.5h4"/>
+              </svg>
+            </span>
             <h3>Организация стала отдельной задачей</h3>
             <p>Сам процесс "разобраться что делать" съедает всю энергию.</p>
           </article>
@@ -1699,32 +1697,59 @@
     <section id="build">
       <div class="wrap">
         <div class="section-head">
-          <h2>Что у тебя появится после пилота</h2>
+          <h2>Что у тебя появится через 7 дней</h2>
         </div>
         <div class="cards-4">
           <article class="card calm">
-            <span class="card-emoji">📥</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6v17"/>
+                <path d="M13.5 17.5 20 24l6.5-6.5"/>
+                <path d="M8 24v7a2.5 2.5 0 0 0 2.5 2.5h19A2.5 2.5 0 0 0 32 31v-7"/>
+              </svg>
+            </span>
             <h3>Одно место для выгрузки хаоса</h3>
             <p>Не по 17 местам — один понятный вход.</p>
           </article>
           <article class="card sun">
-            <span class="card-emoji">🤖</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 7v4"/>
+                <circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/>
+                <rect x="9" y="11" width="22" height="19" rx="6"/>
+                <circle cx="15.5" cy="20" r="1.8" fill="currentColor" stroke="none"/>
+                <circle cx="24.5" cy="20" r="1.8" fill="currentColor" stroke="none"/>
+                <path d="M16 25.5h8"/>
+              </svg>
+            </span>
             <h3>3–5 живых AI-сценариев</h3>
             <p>Разбить липкую задачу, вернуть контекст, сузить фокус.</p>
           </article>
           <article class="card signal">
-            <span class="card-emoji">☀️</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <circle cx="20" cy="20" r="7"/>
+                <path d="M20 4.5v4M20 31.5v4M4.5 20h4M31.5 20h4M9 9l2.8 2.8M28.2 28.2 31 31M31 9l-2.8 2.8M11.8 28.2 9 31"/>
+              </svg>
+            </span>
             <h3>Понятный вход в день</h3>
             <p>Не зависать утром на «что вообще делать сегодня».</p>
           </article>
           <article class="card calm">
-            <span class="card-emoji">🔄</span>
+            <span class="card-emoji" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 20a11 11 0 0 1 18.5-7.9"/>
+                <path d="M27.5 7v5.5H22"/>
+                <path d="M31 20a11 11 0 0 1-18.5 7.9"/>
+                <path d="M12.5 33v-5.5H18"/>
+              </svg>
+            </span>
             <h3>Сценарий после выпадения</h3>
             <p>Система должна помогать мягко вернуться, а не умирать.</p>
           </article>
         </div>
         <figure class="section-illo">
-          <img src="assets/build_result.svg" alt="Иллюстрация: слева хаотичные карточки, справа аккуратный стек — результат после пилота.">
+          <img src="assets/build_result.svg" alt="Иллюстрация: слева хаотичные карточки, справа аккуратный стек — результат совместной работы.">
         </figure>
       </div>
     </section>
@@ -1871,7 +1896,7 @@
           </article>
         </div>
         <figure class="section-illo">
-          <img src="assets/flow_timeline.svg" alt="Иллюстрация: четыре шага пилота — таймлайн от первого созвона до готовой схемы.">
+          <img src="assets/flow_timeline.svg" alt="Иллюстрация: четыре шага процесса — таймлайн от первого созвона до готовой схемы.">
         </figure>
       </div>
     </section>
@@ -1908,7 +1933,7 @@
       <div class="wrap pilot-grid">
         <article class="pilot-card">
           <div class="section-head">
-            <h2>Пилот для первых 5 человек</h2>
+            <h2>Формат и цена</h2>
             <p>Живой формат — собрать рабочую опору под твою жизнь.</p>
           </div>
           <ul class="pilot-list">
@@ -1948,7 +1973,7 @@
           <div class="micro-label">Стартовая цена</div>
           <h3>Первые 5 мест</h3>
           <div class="price-amount">9 900 ₽</div>
-          <p>Пилот. После первых 5 кейсов цена изменится.</p>
+          <p>Стартовая цена. После первых 5 кейсов вырастет.</p>
           <ul class="price-list">
             <li>без длинных уроков;</li>
             <li>без обязательной любви к технике;</li>
@@ -2008,7 +2033,7 @@
           </article>
           <article class="faq-card">
             <h3>Это дорого для меня сейчас.</h3>
-            <p>Честная реакция. 9 900 ₽ — пилотная цена именно потому, что продукт живой и я собираю первые кейсы. Если сейчас не момент финансово, можно подписаться на <a href="https://t.me/neiro_orien" target="_blank" rel="noopener noreferrer">@neiro_orien</a> и вернуться позже — формат никуда не денется.</p>
+            <p>Честная реакция. 9 900 ₽ — стартовая цена именно потому, что продукт живой и я собираю первые кейсы. Если сейчас не момент финансово, можно подписаться на <a href="https://t.me/neiro_orien" target="_blank" rel="noopener noreferrer">@neiro_orien</a> и вернуться позже — формат никуда не денется.</p>
           </article>
         </div>
       </div>
