@@ -1,0 +1,15 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Здесь будет фото Николая">
+  <rect width="800" height="1000" fill="#2E4A3E"/>
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <g opacity="0.5" stroke="#EDF0EE" stroke-width="6" fill="none">
+    <circle cx="400" cy="430" r="118"/>
+    <path d="M232 760c0-110 75-186 168-186s168 76 168 186" stroke-linecap="round"/>
+  </g>
+  <text x="400" y="900" text-anchor="middle" font-family="Commissioner, sans-serif" font-size="34" fill="#EDF0EE" opacity="0.7" letter-spacing="1">фото будет здесь</text>
+  <defs>
+    <linearGradient id="g" x1="400" y1="0" x2="400" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15241D" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#15241D" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+</svg>

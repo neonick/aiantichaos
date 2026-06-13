@@ -3,1669 +3,405 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI-антихаос для людей с СДВГ</title>
-  <meta name="description" content="AI-опора для людей с СДВГ и хроническим хаосом: меньше держать в голове, легче стартовать, быстрее возвращаться после выпадения.">
+  <title>AIAntiChaos — личная система против хаоса с помощью нейросети</title>
+  <meta name="description" content="Персональная консультация: за неделю собираем из Claude твою личную систему — память, задачи, проекты. Для тех, у кого куча идей и ничего не доходит до конца.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AIAntiChaos — личная система против хаоса">
+  <meta property="og:description" content="За неделю собираем из Claude твою личную систему: память, задачи, проекты. Для тех, у кого куча идей и ничего не доходит до конца.">
+  <meta property="og:url" content="https://aiantichaos.ru">
+  <meta name="theme-color" content="#15241D">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Unbounded:wght@500;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fff7ee;
-      --bg-2: #fff1d8;
-      --paper: rgba(255, 250, 244, 0.9);
-      --paper-strong: #fff9f2;
-      --ink: #161417;
-      --muted: #5c5662;
-      --line: rgba(22, 20, 23, 0.1);
-      --orange: #ff7b22;
-      --orange-deep: #e45d00;
-      --teal: #0c9b89;
-      --teal-soft: #d6f5ef;
-      --yellow: #ffd84c;
-      --yellow-soft: #fff1a8;
-      --berry: #ff4f6d;
-      --berry-soft: #ffd9e0;
-      --shadow-lg: 0 28px 80px rgba(22, 20, 23, 0.12);
-      --shadow-md: 0 18px 46px rgba(22, 20, 23, 0.08);
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
-      --max: 1180px;
+      --paper: #EDF0EE;
+      --paper-2: #E4E9E5;
+      --ink: #15241D;
+      --pine: #2E4A3E;
+      --sage: #8AA396;
+      --muted: #51635A;
+      --amber: #E58A3C;
+      --amber-deep: #C9701F;
+      --line: #D2DAD5;
+      --rail: 44px;
+      --pad: 92px;
+      --max: 760px;
+      --display: "Commissioner", system-ui, sans-serif;
+      --body: "Onest", system-ui, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: var(--body);
       color: var(--ink);
-      background:
-        radial-gradient(circle at 8% 10%, rgba(255, 123, 34, 0.22), transparent 22%),
-        radial-gradient(circle at 88% 14%, rgba(12, 155, 137, 0.2), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(255, 216, 76, 0.26), transparent 30%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 38%, #ffe1bf 66%, #e9f8f3 100%);
-      min-height: 100vh;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(22, 20, 23, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22, 20, 23, 0.025) 1px, transparent 1px);
-      background-size: 24px 24px;
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 85%);
-      z-index: -1;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 14px;
-      top: -56px;
-      z-index: 40;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: #19161a;
-      color: #fff8f1;
-      font-weight: 700;
-      transition: top 0.18s ease;
-    }
-
-    .skip-link:focus {
-      top: 12px;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+      background: var(--paper);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     .wrap {
-      width: min(calc(100% - 28px), var(--max));
+      position: relative;
+      max-width: calc(var(--max) + var(--pad) + 48px);
       margin: 0 auto;
+      padding: 0 48px 0 0;
     }
 
-    .site-header {
-      padding: 18px 0 8px;
+    /* ── Нить (signature) ───────────────────────────── */
+    .thread {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--rail);
+      width: 2px;
+      background: var(--line);
+    }
+    .thread__fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: linear-gradient(180deg, var(--pine) 0%, var(--amber) 100%);
+      transition: height 0.1s linear;
     }
 
-    .topbar {
+    /* ── Секции ─────────────────────────────────────── */
+    .section {
+      position: relative;
+      padding: 92px 0 92px var(--pad);
+      max-width: calc(var(--max) + var(--pad));
+    }
+    .node {
+      position: absolute;
+      left: calc(var(--rail) - 7px);
+      top: 100px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--line);
+      transition: border-color 0.5s ease, background 0.5s ease, transform 0.5s ease;
+      z-index: 2;
+    }
+    .section.is-active .node {
+      border-color: var(--amber);
+      background: var(--amber);
+      transform: scale(1.15);
+    }
+
+    .eyebrow {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin: 0 0 18px;
+    }
+
+    h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.08; margin: 0; }
+    h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); letter-spacing: -0.01em; margin-bottom: 28px; }
+    p { margin: 0 0 20px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Header ─────────────────────────────────────── */
+    .head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 14px 18px;
-      background: rgba(255, 251, 246, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      border-radius: 999px;
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow-md);
+      padding: 26px 0 26px var(--pad);
+      max-width: calc(var(--max) + var(--pad));
     }
+    .logo { font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .logo span { color: var(--amber); }
+    .head__link { font-size: 0.95rem; font-weight: 500; color: var(--muted); text-decoration: none; }
+    .head__link:hover { color: var(--ink); }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+    /* ── Hero ───────────────────────────────────────── */
+    .hero { padding-top: 56px; padding-bottom: 80px; }
+    .hero__tangle { position: absolute; left: calc(var(--rail) - 59px); top: 84px; width: 120px; height: 150px; z-index: 2; pointer-events: none; }
+    .hero h1 {
+      font-size: clamp(2.3rem, 5.6vw, 4rem);
+      letter-spacing: -0.018em;
+      max-width: 16ch;
+      margin-bottom: 30px;
     }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background:
-        linear-gradient(135deg, var(--orange) 0%, #ffb054 52%, var(--yellow) 100%);
-      color: #fffaf2;
-      font-family: "Unbounded", sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      box-shadow: 0 14px 24px rgba(255, 123, 34, 0.28);
-      transform: rotate(-6deg);
-    }
-
-    .brand-title {
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.02em;
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .nav a {
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 14px;
+    .hero__sub {
+      font-size: clamp(1.06rem, 1.6vw, 1.28rem);
       color: var(--muted);
+      max-width: 54ch;
+      margin-bottom: 38px;
     }
 
-    .nav a:hover {
-      background: rgba(22, 20, 23, 0.06);
-      color: var(--ink);
-    }
-
-    .nav a:focus-visible,
-    .btn:focus-visible {
-      outline: 3px solid rgba(255, 216, 76, 0.78);
-      outline-offset: 4px;
-    }
-
-    .nav-cta {
-      background: var(--ink);
-      color: #fff8f1 !important;
-      font-weight: 700;
-    }
-
-    .hero {
-      padding: 22px 0 28px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(310px, 0.88fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .hero-main,
-    .hero-side,
-    .card,
-    .faq-card,
-    .pilot-card,
-    .price-card {
-      background: var(--paper);
-      border: 1px solid rgba(255, 255, 255, 0.92);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(16px);
-    }
-
-    .hero-main {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      padding: 30px;
-      background:
-        linear-gradient(160deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 247, 236, 0.92) 100%);
-    }
-
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -62px;
-      top: -50px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 123, 34, 0.22), transparent 72%);
-      pointer-events: none;
-    }
-
-    .hero-main::after {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      left: -110px;
-      bottom: -130px;
-      border-radius: 42px;
-      transform: rotate(24deg);
-      background: rgba(12, 155, 137, 0.1);
-      pointer-events: none;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      margin: 0;
-      font-family: "Unbounded", sans-serif;
-      letter-spacing: -0.04em;
-      line-height: 1.02;
-    }
-
-    h1 {
-      font-size: clamp(32px, 5.4vw, 64px);
-      margin-bottom: 18px;
-    }
-
-    .hero-lead {
-      margin: 0 0 22px;
-      font-size: 20px;
-      line-height: 1.48;
-      color: var(--muted);
-    }
-
-    .pulse-line {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(12, 155, 137, 0.1);
-      color: var(--teal);
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .pulse-dot {
-      width: 10px;
-      height: 10px;
-      flex-shrink: 0;
-      border-radius: 50%;
-      background: currentColor;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .copy-actions {
-      margin-top: 14px;
-    }
-
+    /* ── Кнопка ─────────────────────────────────────── */
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 22px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 15px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
-      color: #fff9f2;
-      box-shadow: 0 18px 30px rgba(255, 123, 34, 0.28);
-    }
-
-    .btn-secondary {
-      background: #fff;
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 14px;
-      align-content: start;
-      border-radius: var(--radius-xl);
-      padding: 18px;
-      background:
-        linear-gradient(180deg, rgba(255, 248, 240, 0.94) 0%, rgba(255, 255, 255, 0.72) 100%);
-    }
-
-    .hero-visual {
-      display: grid;
-      gap: 14px;
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 255, 251, 0.86) 100%);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .hero-visual h3,
-    .mode-copy h3,
-    .mode-art h3,
-    .art-card h3 {
-      font-size: clamp(22px, 3vw, 30px);
-      margin-bottom: 10px;
-    }
-
-    .hero-visual p,
-    .mode-copy p,
-    .mode-art p,
-    .art-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.58;
-    }
-
-    .hero-visual img,
-    .mode-art img,
-    .art-card img {
-      border-radius: 24px;
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      background: #fffdf8;
-      box-shadow: var(--shadow-md);
-    }
-
-    .hero-badge-stack {
-      display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 40px;
-      padding: 0 14px;
-      border-radius: 999px;
-      background: rgba(25, 22, 26, 0.84);
-      color: #fff8f1;
-      font-size: 13px;
-      font-weight: 700;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-    }
-
-    .inline-icon {
-      width: 18px;
-      height: 18px;
-      flex: none;
-    }
-
-    .quick-card,
-    .sticky-card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      background: rgba(255, 255, 255, 0.76);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .quick-card::after,
-    .sticky-card::after {
-      content: "";
-      position: absolute;
-      inset: auto 16px -10px auto;
-      width: 78px;
-      height: 20px;
-      border-radius: 999px;
-      background: rgba(255, 216, 76, 0.5);
-      transform: rotate(-8deg);
-      filter: blur(1px);
-      pointer-events: none;
-    }
-
-    .micro-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(22, 20, 23, 0.06);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .quick-card h3,
-    .sticky-card h3,
-    .pilot-card h3,
-    .faq-card h3,
-    .card h3 {
-      font-size: clamp(20px, 2.5vw, 28px);
-      margin-bottom: 10px;
-    }
-
-    .quick-card p,
-    .sticky-card p,
-    .pilot-card p,
-    .price-card p,
-    .faq-card p,
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .quick-list,
-    .mini-list,
-    .price-list,
-    .pilot-list {
-      margin: 14px 0 0;
-      padding-left: 18px;
-      line-height: 1.65;
-    }
-
-    .quick-list li,
-    .mini-list li,
-    .price-list li,
-    .pilot-list li {
-      margin-bottom: 8px;
-    }
-
-    section {
-      padding: 24px 0;
-      scroll-margin-top: 16px;
-    }
-
-    .anchor-target {
-      display: block;
-      height: 0;
-      scroll-margin-top: 16px;
-    }
-
-    .section-head {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(28px, 4.6vw, 54px);
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.55;
-    }
-
-    .cards-3,
-    .faq-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .cards-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .faq-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .card,
-    .faq-card,
-    .pilot-card,
-    .price-card {
-      border-radius: var(--radius-lg);
-      padding: 22px;
-    }
-
-    .card-top {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 46px;
-      height: 46px;
-      padding: 0 14px;
-      border-radius: 14px;
-      margin-bottom: 14px;
-      font-weight: 800;
-      background: rgba(255, 216, 76, 0.42);
-      color: #705300;
-      box-shadow: inset 0 0 0 1px rgba(112, 83, 0, 0.08);
-    }
-
-    .card.signal .card-top {
-      background: var(--berry-soft);
-      color: #7c2231;
-    }
-
-    .card.calm .card-top {
-      background: var(--teal-soft);
-      color: #0a6d61;
-    }
-
-    .card.sun .card-top {
-      background: rgba(255, 216, 76, 0.46);
-      color: #705300;
-    }
-
-    .accent-strip {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding: 20px;
-      border-radius: var(--radius-lg);
-      background:
-        linear-gradient(135deg, rgba(12, 155, 137, 0.12) 0%, rgba(255, 216, 76, 0.22) 100%);
-      border: 1px solid rgba(12, 155, 137, 0.12);
-      box-shadow: var(--shadow-md);
-      font-size: 20px;
-      line-height: 1.5;
+      font-family: var(--body);
       font-weight: 600;
-      color: #1d2e2a;
-    }
-
-    .copy-box {
-      position: relative;
-      display: block;
-      width: 100%;
-      margin-top: 14px;
-      padding: 16px 18px 52px;
-      border-radius: 18px;
-      border: 0;
-      appearance: none;
-      background: #19161a;
-      color: #fff8f2;
-      text-align: left;
-      font: inherit;
-      font-size: 15px;
-      line-height: 1.62;
-      cursor: pointer;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .copy-box:hover {
-      transform: translateY(-2px);
-    }
-
-    .copy-box:focus-visible {
-      outline: 3px solid rgba(255, 216, 76, 0.78);
-      outline-offset: 4px;
-    }
-
-    .copy-box::after {
-      content: attr(data-hint);
-      position: absolute;
-      left: 18px;
-      bottom: 16px;
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffdcae;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .copy-box.is-copied {
-      background: #0c7d6f;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 18px 34px rgba(12, 155, 137, 0.24);
-    }
-
-    .stat {
-      display: block;
-      margin-bottom: 10px;
-      font-family: "Unbounded", sans-serif;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-    }
-
-    .trust-panel {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-      gap: 18px;
-      padding: 24px;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(150deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 239, 216, 0.92) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.92);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(16px);
-    }
-
-    .trust-panel::before {
-      content: "";
-      position: absolute;
-      width: 230px;
-      height: 230px;
-      right: -82px;
-      top: -92px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 123, 34, 0.16), transparent 72%);
-      pointer-events: none;
-    }
-
-    .trust-panel::after {
-      content: "";
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      left: -90px;
-      bottom: -110px;
-      border-radius: 48px;
-      transform: rotate(24deg);
-      background: rgba(12, 155, 137, 0.08);
-      pointer-events: none;
-    }
-
-    .trust-copy,
-    .trust-stats {
-      position: relative;
-      z-index: 1;
-    }
-
-    .trust-copy h2 {
-      font-size: clamp(28px, 4.3vw, 52px);
-      margin-bottom: 14px;
-    }
-
-    .trust-copy p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.58;
-    }
-
-    .trust-stats {
-      display: grid;
-      gap: 12px;
-      align-content: stretch;
-    }
-
-    .trust-stat {
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .trust-stat h3 {
-      font-size: clamp(20px, 2.5vw, 28px);
-      margin-bottom: 8px;
-    }
-
-    .trust-stat p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .mode-lab {
-      padding: 18px;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 244, 228, 0.94) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .mode-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .mode-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      appearance: none;
-      background: rgba(255, 255, 255, 0.82);
+      font-size: 1.05rem;
       color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
-    }
-
-    .mode-tab:hover {
-      transform: translateY(-2px);
-    }
-
-    .mode-tab:focus-visible {
-      outline: 3px solid rgba(255, 216, 76, 0.78);
-      outline-offset: 4px;
-    }
-
-    .mode-tab.is-active {
-      background: linear-gradient(135deg, var(--orange) 0%, #ff9a3c 100%);
-      border-color: transparent;
-      color: #fffaf2;
-      box-shadow: 0 18px 30px rgba(255, 123, 34, 0.26);
-    }
-
-    .mode-panel {
-      display: none;
-    }
-
-    .mode-panel.is-active {
-      display: block;
-    }
-
-    .mode-grid,
-    .art-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .mode-grid {
-      grid-template-columns: minmax(0, 0.94fr) minmax(280px, 1.06fr);
-      align-items: stretch;
-    }
-
-    .art-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .mode-copy,
-    .mode-art,
-    .art-card {
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.76);
-      border: 1px solid rgba(22, 20, 23, 0.08);
-      box-shadow: var(--shadow-md);
-    }
-
-    .mode-list {
-      margin: 16px 0 0;
-      padding-left: 18px;
-      line-height: 1.68;
-    }
-
-    .mode-list li {
-      margin-bottom: 8px;
-    }
-
-    .art-note {
-      margin-top: 14px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.58;
-    }
-
-    .pilot-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .pilot-card {
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 252, 248, 0.92) 0%, rgba(255, 244, 228, 0.96) 100%);
-    }
-
-    .pilot-card::before {
-      content: "";
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      right: -72px;
-      top: -82px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 123, 34, 0.14), transparent 72%);
-      pointer-events: none;
-    }
-
-    .pilot-card::after {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      left: -84px;
-      bottom: -96px;
-      border-radius: 48px;
-      transform: rotate(-18deg);
-      background: rgba(12, 155, 137, 0.08);
-      pointer-events: none;
-    }
-
-    .pilot-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .pilot-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 40px;
-      padding: 0 14px;
+      background: var(--amber);
+      border: none;
       border-radius: 999px;
-      background: rgba(22, 20, 23, 0.06);
-      font-size: 14px;
-      font-weight: 700;
+      padding: 16px 30px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
+    .btn:hover { background: var(--amber-deep); transform: translateY(-2px); }
+    .btn svg { width: 19px; height: 19px; }
 
-    .price-card {
-      position: sticky;
-      top: 14px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 232, 202, 0.96) 0%, rgba(255, 249, 241, 0.9) 100%);
-    }
-
-    .price-card::after {
+    /* ── Узнавание ──────────────────────────────────── */
+    .recognise { background: var(--paper-2); border-radius: 28px; padding-right: 44px; margin: 8px 0; }
+    .checks { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 16px; }
+    .checks li { position: relative; padding-left: 36px; color: var(--ink); }
+    .checks li::before {
       content: "";
-      position: absolute;
-      width: 170px;
-      height: 170px;
-      left: -72px;
-      bottom: -90px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(12, 155, 137, 0.12), transparent 72%);
-      pointer-events: none;
+      position: absolute; left: 0; top: 9px;
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--sage);
+    }
+    .recognise__close { font-family: var(--display); font-weight: 600; font-size: 1.2rem; color: var(--pine); margin: 0; }
+
+    /* ── История ────────────────────────────────────── */
+    .story__grid { display: grid; grid-template-columns: 1fr; gap: 36px; }
+    .story__photo { width: 100%; max-width: 320px; border-radius: 22px; aspect-ratio: 4 / 5; object-fit: cover; box-shadow: 0 20px 50px rgba(21,36,29,0.16); }
+    .story__lead { font-size: 1.12rem; }
+    .grew { list-style: none; margin: 28px 0 0; padding: 22px 0 0; border-top: 1px solid var(--line); display: grid; gap: 14px; }
+    .grew__title { font-family: var(--display); font-weight: 600; font-size: 1.05rem; color: var(--pine); margin-bottom: 4px; }
+    .grew li { padding-left: 22px; position: relative; color: var(--muted); }
+    .grew li b { color: var(--ink); font-weight: 600; }
+    .grew li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+
+    /* ── Этапы (нумерация оправдана) ────────────────── */
+    .steps { display: grid; gap: 4px; margin-top: 8px; }
+    .step { display: grid; grid-template-columns: auto 1fr; gap: 22px; padding: 24px 0; border-top: 1px solid var(--line); }
+    .step:last-child { border-bottom: 1px solid var(--line); }
+    .step__num { font-family: var(--display); font-weight: 700; font-size: 1.5rem; color: var(--amber); line-height: 1; padding-top: 2px; }
+    .step__t { font-family: var(--display); font-weight: 600; font-size: 1.18rem; margin: 0 0 8px; }
+    .step__d { color: var(--muted); margin: 0; }
+
+    /* ── Результат ──────────────────────────────────── */
+    .keep { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 18px; }
+    .keep li { padding-left: 30px; position: relative; }
+    .keep li b { font-family: var(--display); }
+    .keep li::before {
+      content: "";
+      position: absolute; left: 0; top: 8px;
+      width: 14px; height: 14px; border-radius: 4px;
+      background: var(--amber);
     }
 
-    .price-amount {
-      font-family: "Unbounded", sans-serif;
-      font-size: clamp(42px, 7vw, 70px);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      margin: 0 0 14px;
+    /* ── Цена (тёмная) ──────────────────────────────── */
+    .price { background: var(--ink); color: var(--paper); border-radius: 32px; margin: 24px 0 56px; padding-right: 44px; }
+    .price h2 { color: var(--paper); }
+    .price .node { background: var(--ink); }
+    .price__num { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 7vw, 4rem); line-height: 1; margin: 0 0 12px; }
+    .price__num b { color: var(--amber); }
+    .price__what { color: #B7C6BD; max-width: 40ch; margin-bottom: 34px; }
+    .price__micro { color: #93A89C; font-size: 0.95rem; margin: 18px 0 0; max-width: 42ch; }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .foot { padding: 34px 0 44px var(--pad); color: var(--sage); font-size: 0.88rem; max-width: calc(var(--max) + var(--pad)); }
+
+    /* ── Reveal ─────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.is-in { opacity: 1; transform: none; }
+
+    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+
+    /* ── Адаптив ────────────────────────────────────── */
+    @media (max-width: 680px) {
+      :root { --rail: 18px; --pad: 42px; }
+      body { font-size: 17px; }
+      .wrap { padding-right: 20px; }
+      .section { padding: 64px 0 64px var(--pad); }
+      .recognise, .price { padding-right: 20px; border-radius: 22px; }
+      .head, .foot { padding-left: var(--pad); }
+      .hero__tangle { left: calc(var(--rail) - 49px); width: 96px; top: 72px; }
+      .node { top: 72px; }
     }
 
-    .small-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .fit-notes {
-      display: grid;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .fit-note {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .fit-note svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .fit-ok  { background: rgba(12,155,137,0.09); color: #1a4a44; }
-    .fit-ok  svg { color: var(--teal); }
-
-    .fit-best { background: rgba(255,216,76,0.22); color: #5a4100; }
-    .fit-best svg { color: #c08800; }
-
-    .fit-no  { background: rgba(255,79,109,0.09); color: #5a1a24; }
-    .fit-no  svg { color: var(--berry); }
-
-    .faq-card {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(244, 255, 251, 0.92) 100%);
-    }
-
-    .footer-note {
-      padding: 16px 0 40px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.7;
-      }
-      50% {
-        transform: scale(1.35);
-        opacity: 1;
-      }
-    }
-
-    @keyframes floaty {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-6px);
-      }
+    @media (min-width: 720px) {
+      .story__grid { grid-template-columns: 300px 1fr; align-items: start; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .pulse-dot,
-      .floating-a,
-      .floating-b {
-        animation: none;
-      }
-    }
-
-    /* === Hover lifts === */
-    .card, .faq-card {
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-    }
-    .card:hover, .faq-card:hover {
-      transform: translateY(-5px) !important;
-      box-shadow: 0 34px 80px rgba(22, 20, 23, 0.16);
-    }
-
-    /* === Card colour tints === */
-    .card.signal {
-      background: linear-gradient(170deg, rgba(255,255,255,0.9) 0%, rgba(255,217,224,0.38) 100%);
-      border-color: rgba(255, 79, 109, 0.16);
-    }
-    .card.calm {
-      background: linear-gradient(170deg, rgba(255,255,255,0.9) 0%, rgba(214,245,239,0.48) 100%);
-      border-color: rgba(12, 155, 137, 0.16);
-    }
-    .card.sun {
-      background: linear-gradient(170deg, rgba(255,255,255,0.9) 0%, rgba(255,241,168,0.48) 100%);
-      border-color: rgba(255, 216, 76, 0.32);
-    }
-
-    /* === CTA shimmer === */
-    .btn {
-      position: relative;
-    }
-    .btn-primary {
-      overflow: hidden;
-    }
-    .btn-primary::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.18) 50%, transparent 75%);
-      transform: translateX(-100%);
-      animation: btn-shimmer 2.8s ease-in-out infinite;
-    }
-    @keyframes btn-shimmer {
-      0%      { transform: translateX(-100%); }
-      60%,100% { transform: translateX(200%); }
-    }
-
-    /* === Panel fade-in === */
-    @keyframes panel-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .mode-panel.is-active {
-      animation: panel-in 0.28s ease both;
-    }
-
-    /* === Stagger для карточек === */
-    .cards-3 .card:nth-child(1),
-    .faq-grid .faq-card:nth-child(1) { transition-delay: 0ms; }
-    .cards-3 .card:nth-child(2),
-    .faq-grid .faq-card:nth-child(2) { transition-delay: 80ms; }
-    .cards-3 .card:nth-child(3),
-    .faq-grid .faq-card:nth-child(3) { transition-delay: 160ms; }
-    .faq-grid .faq-card:nth-child(4) { transition-delay: 240ms; }
-
-    /* === Scroll reveal === */
-    .reveal {
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* === Hero spotlight (mouse-tracking) === */
-    .hero-main {
-      --mx: 60%;
-      --my: 30%;
-    }
-    .spotlight {
-      pointer-events: none;
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(380px circle at var(--mx) var(--my), rgba(255,123,34,0.13), transparent 65%);
-      z-index: 0;
-    }
-    .hero-main > h1,
-    .hero-main > .hero-lead,
-    .hero-main > .pulse-line,
-    .hero-main > .cta-row {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* === Sticky CTA === */
-    .sticky-cta {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 200;
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-    }
-    .sticky-cta.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    @media (max-width: 760px) {
-      .sticky-cta {
-        display: none;
-      }
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .pilot-grid,
-      .cards-3,
-      .faq-grid,
-      .art-grid,
-      .mode-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .trust-panel {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav {
-        display: none;
-      }
-
-      .hero-grid,
-      .pilot-grid,
-      .cards-3,
-      .faq-grid,
-      .art-grid,
-      .mode-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .trust-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-main,
-      .hero-side,
-      .card,
-      .faq-card,
-      .pilot-card,
-      .price-card,
-      .trust-panel,
-      .trust-stat {
-        padding: 18px;
-      }
-
-      .topbar {
-        padding: 12px 14px;
-      }
-
-      .hero-lead,
-      .section-head p,
-      .accent-strip {
-        font-size: 17px;
-      }
-
-      h1 {
-        max-width: 100%;
-      }
-
-      .quick-card,
-      .sticky-card,
-      .card {
-        transform: none !important;
-      }
-
-      .mode-tabs {
-        display: grid;
-      }
-
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .thread__fill { transition: none; }
+      .btn:hover { transform: none; }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">К сути</a>
-  <div id="copy-status" class="sr-only" aria-live="polite"></div>
-  <header class="site-header">
-    <div class="wrap">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-mark">AI</div>
-          <div class="brand-title">AI-антихаос</div>
-        </div>
-        <nav class="nav">
-          <a href="#pilot">Формат и цена</a>
-          <a href="#modes">Где ломается</a>
-          <a href="#faq">FAQ</a>
-          <a class="nav-cta" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">@neonick</a>
-        </nav>
-      </div>
-    </div>
-  </header>
+  <div class="wrap">
+    <div class="thread" aria-hidden="true"><div class="thread__fill" id="fill"></div></div>
 
-  <main id="main-content">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-main floating-a">
-          <div class="spotlight" aria-hidden="true"></div>
-          <h1>AI-антихаос, когда день расползается.</h1>
-          <p class="hero-lead">
-            За 7 дней собираем простую AI-схему под твою реальную жизнь: меньше держать в голове, легче стартовать и не собирать себя заново каждый день.
-          </p>
-          <div class="pulse-line">
-            <span class="pulse-dot"></span>
-            Пилот: 2 рабочих созвона + 7 дней связи.
-          </div>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Написать @neonick</a>
-            <a class="btn btn-secondary" href="#start">Скопировать короткое сообщение</a>
-          </div>
-        </div>
+    <header class="head">
+      <div class="logo">AI<span>Anti</span>Chaos</div>
+      <a class="head__link" href="https://t.me/neonick">Telegram</a>
+    </header>
 
-        <aside class="hero-side">
-          <article class="quick-card floating-b">
-            <div class="micro-label">Очень коротко</div>
-            <h3>Если читаешь на бегу</h3>
-            <ul class="quick-list">
-              <li>не изучаем AI ради AI;</li>
-              <li>собираем внешний вход в твой хаос;</li>
-              <li>цель: меньше трения уже на этой неделе.</li>
-            </ul>
-          </article>
-
-          <article class="sticky-card">
-            <div class="micro-label">Что покупаешь</div>
-            <h3>Не новую версию себя. А меньше ручного старта.</h3>
-            <ul class="mini-list">
-              <li>одно место для сброса каши;</li>
-              <li>3–5 сценариев под твои дела;</li>
-              <li>вход в день и липкие задачи;</li>
-              <li>сценарий возврата после выпадения.</li>
-            </ul>
-          </article>
-
-        </aside>
-      </div>
+    <!-- HERO -->
+    <section class="section hero">
+      <svg class="hero__tangle" viewBox="0 0 120 150" fill="none" aria-hidden="true">
+        <path d="M60 150 L60 96" stroke="#E58A3C" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M60 96 C30 86 22 64 44 54 C70 42 86 60 70 74 C56 86 34 78 40 58 C46 38 78 30 92 44 C104 56 96 80 74 84 C44 90 26 70 38 48 C48 30 76 24 88 32"
+              stroke="#15241D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+      </svg>
+      <h1 class="reveal">Я годами начинал и бросал. Пока не навёл порядок с помощью нейросети.</h1>
+      <p class="hero__sub reveal">Так я жил много лет. Перепробовал все блокноты и таск-трекеры — и каждый бросал. Потом собрал из Claude личную систему, которая держит все мои дела и память. Проекты наконец поехали. Научу тебя сделать так же, буквально за неделю.</p>
+      <a class="btn reveal" href="https://t.me/neonick">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        Написать в Telegram
+      </a>
     </section>
 
-    <section id="start">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Если даже написать тяжело</h2>
-        </div>
-        <div class="cards-3">
-          <article class="card calm">
-            <div class="card-top">старт</div>
-            <h3>Скопируй. Отправь. Всё.</h3>
-            <p>Не надо писать идеальное сообщение. Достаточно вот такого:</p>
-            <button class="copy-box" type="button" data-copy-box="Привет. У меня хаос в делах и трудный старт задач. Не очень понимаю, подходит ли мне твой формат. Можно коротко понять?" data-hint="нажми, чтобы скопировать">
-              Привет. У меня хаос в делах и трудный старт задач. Не очень понимаю, подходит ли мне твой формат. Можно коротко понять?
-            </button>
-            <div class="cta-row copy-actions">
-              <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Открыть Telegram</a>
-            </div>
-          </article>
-          <article class="card sun">
-            <div class="card-top">дальше</div>
-            <h3>Что будет дальше, без мутного квеста</h3>
-            <ul class="mini-list">
-              <li>я отвечу коротко, без простыни;</li>
-              <li>задам 2-3 простых вопроса;</li>
-              <li>если подходим друг другу, предложу короткий входной созвон;</li>
-              <li>если нет — скажу прямо.</li>
-            </ul>
-          </article>
-          <article class="card signal">
-            <div class="card-top">не надо</div>
-            <h3>Что точно не нужно делать</h3>
-            <ul class="mini-list">
-              <li>не надо сначала разбирать завалы;</li>
-              <li>не надо читать все материалы;</li>
-              <li>не надо красиво формулировать проблему;</li>
-              <li>можно написать одной строкой или голосовым.</li>
-            </ul>
-          </article>
-        </div>
-        <div class="accent-strip">
-          Если стыдно показывать бардак — это не повод откладывать. Можно начать с одного скрина, голосового или просто разговора. На звонок не нужно приносить «собранную версию себя».
-        </div>
-      </div>
+    <!-- УЗНАВАНИЕ -->
+    <section class="section recognise">
+      <span class="node" aria-hidden="true"></span>
+      <h2 class="reveal">Узнаёшь себя?</h2>
+      <ul class="checks">
+        <li class="reveal">Перепробовал все блокноты, заметки и таск-трекеры. Каждый бросал через неделю-другую.</li>
+        <li class="reveal">Список задач разросся снежным комом — теперь его просто страшно открывать.</li>
+        <li class="reveal">Идеи остаются идеями. До дела не доходят.</li>
+        <li class="reveal">Вообще страшно было заводить список задач — «важное и так запомню».</li>
+        <li class="reveal">Доходишь до середины проекта — и запал кончается.</li>
+        <li class="reveal">А когда проект всё-таки готов — непонятно, что с ним делать дальше.</li>
+      </ul>
+      <p class="recognise__close reveal">Если хоть что-то про тебя — читай дальше, я был ровно там же.</p>
     </section>
 
-    <section id="pilot">
-      <div class="wrap pilot-grid">
-        <article class="pilot-card">
-          <div class="section-head">
-            <h2>Формат и цена</h2>
-            <p>Живой пилот: собираем рабочую опору под твою жизнь. Это не очередной курс.</p>
-          </div>
-          <ul class="pilot-list">
-            <li>входной созвон-знакомство 15–20 минут: быстро понять, подходит ли формат;</li>
-            <li>первый рабочий созвон 75–90 минут: смотрим реальный бардак и собираем первый тест;</li>
-            <li>7 дней связи и докрутки: одной строкой, голосом или скрином;</li>
-            <li>второй рабочий созвон 60–90 минут: режем лишнее и оставляем то, что держится;</li>
-            <li>минимум инструментов, максимум снижения трения.</li>
+    <!-- ИСТОРИЯ -->
+    <section class="section story">
+      <span class="node" aria-hidden="true"></span>
+      <h2 class="reveal">Я сам такой</h2>
+      <div class="story__grid">
+        <img class="story__photo reveal" src="assets/portrait_placeholder.svg" alt="Николай — автор AIAntiChaos" width="320" height="400">
+        <div>
+          <p class="story__lead reveal">У меня диагностированный СДВГ и постоянный хаос в голове. Всегда была куча идей — и почти ни одна не доходила до реализации. Дела начинались на энтузиазме, какое-то время делались, потом бросались. Я перепробовал все методы и приложения для продуктивности, прочитал пару десятков книг по продуктивности и GTD. Не помогало ничего — список задач только копился, пока не становилось проще его не открывать.</p>
+          <p class="reveal">Нейросетями я интересуюсь с конца 2022 года. Долго пользовался ими как очень умным гуглом — спросить, получить ответ. А зимой 2025 решил построить из Claude свою личную систему: с памятью, с планированием, с задачами. Не ради кодинга — ради порядка в делах и голове. Система получилась на редкость стабильная и цельная, и все мои давно планируемые проекты полетели.</p>
+          <p class="reveal">Момента-озарения не было. Я просто стал замечать, что проект уже ушёл сильно дальше, чем раньше. Там, где я бы давно забросил, — я продолжал и улучшал. Это перестало быть холодным списком задач. Это стало как туду-лист, который читаешь вместе с приятным другом — тем, кто хочет тебе помочь и знает, как сделать лучше.</p>
+          <ul class="grew reveal">
+            <li class="grew__title">Вот что из этого выросло:</li>
+            <li><b>Клуб бёрдвотчинга</b> — за сезон 13 выездов и больше сотни человек, экскурсии и многодневные туры.</li>
+            <li><b>LEGOLAZER</b> — сервис аналитики, который раньше так и остался бы идеей.</li>
+            <li><b>Tumari</b> — творческий проект, подробный лор выдуманного мира бесконечного дождя и молний.</li>
+            <li><b>Этот сайт</b> — тоже часть той же системы.</li>
+            <li>А ещё вики, телеграм-бот, статьи, рассказы — то, что годами лежало «когда-нибудь».</li>
           </ul>
-          <div class="pilot-chip-row">
-            <div class="pilot-chip">18+</div>
-            <div class="pilot-chip">ноутбук или компьютер</div>
-            <div class="pilot-chip">диагноз не нужен</div>
-            <div class="pilot-chip">техбэкграунд не нужен</div>
-            <div class="pilot-chip">можно без подготовки</div>
-            <div class="pilot-chip">камера не обязательна</div>
-            <div class="pilot-chip">показ экрана — по желанию</div>
-          </div>
-          <div class="fit-notes">
-            <div class="fit-note fit-ok">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-              <span>Подходит, если есть хаос, трудный старт задач и ощущение, что обычные системы требуют слишком много сил.</span>
-            </div>
-            <div class="fit-note fit-best">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <span>Особенно хорошо заходит соло-спецам, креаторам и небольшим предпринимателям — тем, у кого хаос уже стоит денег или сроков.</span>
-            </div>
-            <div class="fit-note fit-no">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6m0-6 6 6"/></svg>
-              <span>Не подходит, если хочется магии без участия, длинной школы или сложной системы сразу.</span>
-            </div>
-          </div>
-        </article>
-
-        <aside class="price-card">
-          <div class="price-amount">9 900 ₽</div>
-          <p><strong>Первые 5 мест.</strong> Дальше цена выше.</p>
-          <ul class="price-list">
-            <li>без длинных уроков;</li>
-            <li>без обязательной любви к технике;</li>
-            <li>без обещаний «починить жизнь»;</li>
-            <li>если формат не твой, я скажу это прямо.</li>
-          </ul>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer">Написать @neonick</a>
-            <a class="btn btn-secondary" href="#faq">Сначала FAQ</a>
-          </div>
-          <p class="small-note">
-            Контакт для записи:
-            <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a>
-          </p>
-        </aside>
+          <p class="reveal" style="margin-top:24px">Я давно люблю делать полезное — opensource, статьи в Википедии, карты, митапы для разработчиков. Помогать — это про меня. И мне обидно смотреть, как мощный инструмент проходит мимо: большинство используют нейросети либо как поиск, либо чтобы писать код. Почти никто не строит из них систему, которая наводит порядок в собственной жизни. Этому я и хочу научить.</p>
+        </div>
       </div>
     </section>
 
-    <section id="trust">
-      <div class="wrap">
-        <div class="trust-panel">
-          <div class="trust-copy">
-            <div class="micro-label">Почему можно верить</div>
-            <h2>Я не продаю теорию про AI. У меня это уже живёт в работе.</h2>
-            <p>
-              <strong>Ник Марченко.</strong> СДВГ диагностирован. AI — первое, что реально держится,
-              а не красиво выглядит три дня.
-            </p>
-            <p>
-              На созвоне можно показать настоящие куски: память по проектам, еженедельный обзор,
-              голос → структуру и сценарии для липких задач.
-            </p>
+    <!-- ФОРМАТ -->
+    <section class="section format">
+      <span class="node" aria-hidden="true"></span>
+      <span class="eyebrow reveal">Как это устроено</span>
+      <h2 class="reveal">Что мы сделаем за неделю</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step__num">1</div>
+          <div>
+            <p class="step__t">Первый звонок — 2 часа</p>
+            <p class="step__d">Разбираемся, что у тебя в делах и в голове, чего хочется. Прямо на звонке начинаем настраивать твою систему: память, нужные навыки, основу под твои проекты.</p>
           </div>
-          <div class="trust-stats">
-            <article class="trust-stat">
-              <span class="stat">15 лет</span>
-              <h3>Системной работы и фронтенда</h3>
-              <p>Инженер, который собирает рабочие контуры руками.</p>
-            </article>
-            <article class="trust-stat">
-              <span class="stat">372 часа</span>
-              <h3>живой AI-практики за 168 сессий</h3>
-              <p>Живу в этом каждый день, на реальных рабочих задачах.</p>
-            </article>
-            <article class="trust-stat">
-              <span class="stat">4+</span>
-              <h3>Настоящих проекта, где это уже держится</h3>
-              <p>На созвоне покажу вживую: реальные артефакты, не пустые слова.</p>
-            </article>
+        </div>
+        <div class="step reveal">
+          <div class="step__num">2</div>
+          <div>
+            <p class="step__t">Неделя на связи</p>
+            <p class="step__d">Ты живёшь со своей системой и пользуешься. Я рядом в переписке — отвечаю на вопросы, помогаю докрутить под тебя.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step__num">3</div>
+          <div>
+            <p class="step__t">Второй звонок — 2 часа</p>
+            <p class="step__d">Через неделю смотрим, что получилось, а что забуксовало. Улучшаем, убираем лишнее, закрепляем.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="modes">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Где у тебя чаще всего ломается день?</h2>
-          <p>Выбери один сценарий. Этого достаточно, чтобы понять, что именно будем собирать.</p>
-        </div>
-        <div class="mode-lab">
-          <div class="mode-tabs" role="tablist" aria-label="Режимы работы">
-            <button class="mode-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="mode-fog" tabindex="0" data-mode-target="fog">
-              <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <circle cx="9" cy="8" r="3"/>
-                <path d="M4 15h16M7 19h10"/>
-              </svg>
-              Утро в тумане
-            </button>
-            <button class="mode-tab" type="button" role="tab" aria-selected="false" aria-controls="mode-sticky" tabindex="-1" data-mode-target="sticky">
-              <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <rect x="5" y="5" width="14" height="14" rx="3"/>
-                <path d="M9 12h6M12 9v6"/>
-              </svg>
-              Липкая задача
-            </button>
-            <button class="mode-tab" type="button" role="tab" aria-selected="false" aria-controls="mode-week" tabindex="-1" data-mode-target="week">
-              <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <path d="M6 12a6 6 0 1 0 2-4.47"/>
-                <path d="M6 4v4h4"/>
-              </svg>
-              Плохая неделя
-            </button>
-          </div>
-
-          <div class="mode-panel is-active" id="mode-fog" role="tabpanel" data-mode-panel="fog">
-            <div class="mode-grid">
-              <article class="mode-copy">
-                <div class="micro-label">Режим 01</div>
-                <h3>Когда утром мозг уже устал от выбора</h3>
-                <p>День ломается до первого действия — слишком много шума на входе.</p>
-                <ul class="mode-list">
-                  <li>сужаем поле до 1-3 живых задач;</li>
-                  <li>достаём один следующий шаг;</li>
-                  <li>можно начать голосом.</li>
-                </ul>
-                <div class="pilot-chip-row">
-                  <div class="pilot-chip">1 вопрос</div>
-                  <div class="pilot-chip">1 фокус</div>
-                  <div class="pilot-chip">можно голосом</div>
-                </div>
-              </article>
-              <article class="mode-art">
-                <div class="micro-label">Как это выглядит</div>
-                <h3>Мягкий вход вместо пустого экрана</h3>
-                <img src="assets/soft_start_map.svg" alt="Иллюстрация мягкого старта: голос, структура и один следующий шаг.">
-              </article>
-            </div>
-          </div>
-
-          <div class="mode-panel" id="mode-sticky" role="tabpanel" data-mode-panel="sticky">
-            <div class="mode-grid">
-              <article class="mode-copy">
-                <div class="micro-label">Режим 02</div>
-                <h3>Когда задача липкая и смотреть на неё противно</h3>
-                <p>Проблема не в мотивации — в вязкости. Мозг отталкивается ещё до старта.</p>
-                <ul class="mode-list">
-                  <li>режем задачу до микродвижения;</li>
-                  <li>убираем пустое «надо заняться»;</li>
-                  <li>делаем вход без героизма.</li>
-                </ul>
-                <div class="pilot-chip-row">
-                  <div class="pilot-chip">анти-вязкость</div>
-                  <div class="pilot-chip">1 микрошаг</div>
-                  <div class="pilot-chip">без героизма</div>
-                </div>
-              </article>
-              <article class="mode-art">
-                <div class="micro-label">Как это выглядит</div>
-                <h3>Из «не могу начать» в конкретный ход</h3>
-                <img src="assets/hero_chaos_to_clarity.svg" alt="Иллюстрация перехода от рассыпанного хаоса к понятному следующему шагу.">
-              </article>
-            </div>
-          </div>
-
-          <div class="mode-panel" id="mode-week" role="tabpanel" data-mode-panel="week">
-            <div class="mode-grid">
-              <article class="mode-copy">
-                <div class="micro-label">Режим 03</div>
-                <h3>Когда неделя поехала, и уже не хочется даже открывать систему</h3>
-                <p>Хорошая опора нужна именно для плохой недели.</p>
-                <ul class="mode-list">
-                  <li>вытаскиваем контекст без самогаза;</li>
-                  <li>смотрим, что ещё держится;</li>
-                  <li>возвращаем один слой, а не всю жизнь.</li>
-                </ul>
-                <div class="pilot-chip-row">
-                  <div class="pilot-chip">мягкий возврат</div>
-                  <div class="pilot-chip">не с нуля</div>
-                  <div class="pilot-chip">без стыда</div>
-                </div>
-              </article>
-              <article class="mode-art">
-                <div class="micro-label">Как это выглядит</div>
-                <h3>Доказательства и память — видно, что реально было сделано</h3>
-                <img src="assets/proof_stack.svg" alt="Иллюстрация стека доказательств и памяти: обзор, заметки и следы проделанной работы.">
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- РЕЗУЛЬТАТ -->
+    <section class="section result">
+      <span class="node" aria-hidden="true"></span>
+      <h2 class="reveal">Что у тебя останется</h2>
+      <p class="reveal">Не вдохновение на пару дней, а рабочая система, которую можно открыть и пользоваться:</p>
+      <ul class="keep">
+        <li class="reveal"><b>Claude, который помнит тебя</b> — твои проекты, задачи, контекст. Личная память, а не чистый лист каждый раз.</li>
+        <li class="reveal"><b>Система под твои дела</b> — то, что можно потрогать и сказать «вот это моё».</li>
+        <li class="reveal"><b>Инструменты</b>, которые позволят тебе эффективно вести собственные рабочие и творческие проекты.</li>
+      </ul>
     </section>
 
-    <section id="faq">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>FAQ</h2>
-          <p>
-            Коротко про главные сомнения перед тем, как написать.
-          </p>
-        </div>
-        <div class="faq-grid">
-          <article class="faq-card">
-            <h3>Я вообще не технарь. Мне сюда можно?</h3>
-            <p>Да. Мы не собираем пульт космического корабля. Мы собираем понятный способ меньше держать в голове и легче заходить в дела.</p>
-          </article>
-          <article class="faq-card">
-            <h3>А если у меня нет диагноза?</h3>
-            <p>Диагноз не обязателен. Если у тебя есть хаос, трудный старт задач, потеря контекста и обычные системы не держатся, формат уже может подойти.</p>
-          </article>
-          <article class="faq-card">
-            <h3>Я уже пробовал планеры, Notion и todo-приложения</h3>
-            <p>Тем более. Здесь другая задача: убрать лишнее и оставить только то, что реально снижает трение. Ещё один слой контроля тебе и так не нужен.</p>
-          </article>
-          <article class="faq-card">
-            <h3>Почему к тебе, а не просто в ChatGPT самому?</h3>
-            <p>ChatGPT у многих уже есть. Ценность — в схеме, которая держится на твоей реальной неделе.</p>
-          </article>
-        </div>
-      </div>
+    <!-- ЦЕНА -->
+    <section class="section price">
+      <span class="node" aria-hidden="true"></span>
+      <h2 class="reveal">Цена</h2>
+      <p class="price__num reveal"><b>9 900 ₽</b></p>
+      <p class="price__what reveal">За всё: два звонка по 2 часа и неделя сопровождения между ними.</p>
+      <a class="btn reveal" href="https://t.me/neonick">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        Написать в Telegram
+      </a>
+      <p class="price__micro reveal">Напиши — расскажешь, что у тебя за хаос, а я честно скажу, помогу или нет. Без обязательств.</p>
     </section>
 
-    <section>
-      <div class="wrap">
-        <div class="accent-strip">
-          Не готов писать прямо сейчас? Можно просто посмотреть как это выглядит изнутри — я пишу про AI-практику и жизнь с хаосом в <a href="https://t.me/neiro_orien" target="_blank" rel="noopener noreferrer"><strong>@neiro_orien</strong></a>.
-        </div>
-      </div>
-    </section>
-  </main>
+    <footer class="foot">AIAntiChaos · @neonick · 2026</footer>
+  </div>
 
-  <a class="sticky-cta btn btn-primary" href="https://t.me/neonick" target="_blank" rel="noopener noreferrer" aria-label="Написать @neonick в Telegram">
-    <svg style="width:18px;height:18px;margin-right:8px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/>
-    </svg>
-    Написать @neonick
-  </a>
-
-  <footer class="wrap footer-note">
-    Ник Марченко · Контакт для записи:
-    <a href="https://t.me/neonick" target="_blank" rel="noopener noreferrer"><strong>@neonick</strong></a><br>
-    Для медиа, подкастов, эфиров и партнёрств: тот же контакт.
-  </footer>
   <script>
-    const copyBox = document.querySelector("[data-copy-box]");
-    const copyStatus = document.querySelector("#copy-status");
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var fill = document.getElementById('fill');
+      var thread = document.querySelector('.thread');
+      var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
 
-    if (copyBox) {
-      const originalHint = copyBox.getAttribute("data-hint");
-
-      copyBox.addEventListener("click", async () => {
-        const text = copyBox.getAttribute("data-copy-box");
-
-        try {
-          await navigator.clipboard.writeText(text);
-          copyBox.classList.add("is-copied");
-          copyBox.setAttribute("data-hint", "Скопировано. Можно сразу отправлять.");
-          if (copyStatus) copyStatus.textContent = "Сообщение скопировано";
-
-          window.setTimeout(() => {
-            copyBox.classList.remove("is-copied");
-            copyBox.setAttribute("data-hint", originalHint);
-            if (copyStatus) copyStatus.textContent = "";
-          }, 2200);
-        } catch (error) {
-          copyBox.setAttribute("data-hint", "Если не скопировалось, просто выдели текст руками.");
-          if (copyStatus) copyStatus.textContent = "Автокопирование не сработало";
-
-          window.setTimeout(() => {
-            copyBox.setAttribute("data-hint", originalHint);
-            if (copyStatus) copyStatus.textContent = "";
-          }, 2600);
-        }
-      });
-    }
-
-    // Hero spotlight — mouse tracking
-    const heroMain = document.querySelector('.hero-main');
-    if (heroMain) {
-      heroMain.addEventListener('mousemove', (e) => {
-        const r = heroMain.getBoundingClientRect();
-        heroMain.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-        heroMain.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
-      });
-      heroMain.addEventListener('mouseleave', () => {
-        heroMain.style.setProperty('--mx', '60%');
-        heroMain.style.setProperty('--my', '30%');
-      });
-    }
-
-    // Scroll reveal
-    if ('IntersectionObserver' in window) {
-      const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            revealObs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll(
-        '.section-head, .cards-3, .mode-lab, .pilot-grid, .trust-panel, ' +
-        '.faq-grid, .accent-strip'
-      ).forEach((el) => {
-        el.classList.add('reveal');
-        revealObs.observe(el);
-      });
-    }
-
-    // Sticky CTA — appears after scrolling past the hero
-    const stickyCta = document.querySelector('.sticky-cta');
-    if (stickyCta) {
-      window.addEventListener('scroll', () => {
-        stickyCta.classList.toggle('is-visible', window.scrollY > 560);
-      }, { passive: true });
-    }
-
-    window.addEventListener('load', () => {
-      if (!window.location.hash) return;
-
-      const target = document.querySelector(window.location.hash);
-      if (!target) return;
-
-      window.setTimeout(() => {
-        target.scrollIntoView({ block: 'start', behavior: 'auto' });
-      }, 80);
-    });
-
-    function setupTabs({ tabSelector, panelSelector, tabAttr, panelAttr }) {
-      const tabs = Array.from(document.querySelectorAll(tabSelector));
-      const panels = Array.from(document.querySelectorAll(panelSelector));
-
-      if (!tabs.length || !panels.length) return;
-
-      function activate(tab) {
-        const target = tab.getAttribute(tabAttr);
-
-        tabs.forEach((button) => {
-          const isActive = button === tab;
-          button.classList.toggle("is-active", isActive);
-          button.setAttribute("aria-selected", isActive ? "true" : "false");
-          button.tabIndex = isActive ? 0 : -1;
-        });
-
-        panels.forEach((panel) => {
-          panel.classList.toggle("is-active", panel.getAttribute(panelAttr) === target);
-        });
+      // Прогресс нити по скроллу
+      function updateThread() {
+        var rect = thread.getBoundingClientRect();
+        var total = thread.offsetHeight;
+        var passed = Math.min(Math.max(-rect.top + window.innerHeight * 0.5, 0), total);
+        fill.style.height = passed + 'px';
       }
 
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          activate(tab);
+      if (reduce) {
+        fill.style.height = '100%';
+        sections.forEach(function (s) { s.classList.add('is-active'); });
+        document.querySelectorAll('.reveal').forEach(function (e) { e.classList.add('is-in'); });
+        return;
+      }
+
+      // Активация узлов + reveal
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) en.target.classList.add('is-active');
         });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      sections.forEach(function (s) { io.observe(s); });
 
-        tab.addEventListener("keydown", (event) => {
-          const currentIndex = tabs.indexOf(tab);
-          let nextIndex = currentIndex;
-
-          if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabs.length;
-          if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-
-          if (nextIndex !== currentIndex) {
-            event.preventDefault();
-            tabs[nextIndex].focus();
-            activate(tabs[nextIndex]);
-          }
+      var rio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('is-in'); rio.unobserve(en.target); }
         });
-      });
-    }
+      }, { rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('.reveal').forEach(function (e) { rio.observe(e); });
 
-    setupTabs({
-      tabSelector: "[data-mode-target]",
-      panelSelector: "[data-mode-panel]",
-      tabAttr: "data-mode-target",
-      panelAttr: "data-mode-panel"
-    });
-
+      window.addEventListener('scroll', updateThread, { passive: true });
+      window.addEventListener('resize', updateThread);
+      updateThread();
+    })();
   </script>
 </body>
 </html>
