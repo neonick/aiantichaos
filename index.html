@@ -118,14 +118,14 @@
       padding: 26px 0 26px var(--pad);
       max-width: calc(var(--max) + var(--pad));
     }
-    .logo { font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .logo { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .logo__mark { height: 40px; width: auto; display: block; }
     .logo span { color: var(--amber); }
     .head__link { font-size: 0.95rem; font-weight: 500; color: var(--muted); text-decoration: none; }
     .head__link:hover { color: var(--ink); }
 
     /* ── Hero ───────────────────────────────────────── */
     .hero { padding-top: 56px; padding-bottom: 80px; }
-    .hero__tangle { position: absolute; left: calc(var(--rail) - 59px); top: 84px; width: 120px; height: 150px; z-index: 2; pointer-events: none; }
     .hero h1 {
       font-size: clamp(2.3rem, 5.6vw, 4rem);
       letter-spacing: -0.018em;
@@ -225,7 +225,6 @@
       .section { padding: 64px 0 64px var(--pad); }
       .recognise, .price { padding-right: 20px; border-radius: 22px; }
       .head, .foot { padding-left: var(--pad); }
-      .hero__tangle { left: calc(var(--rail) - 49px); width: 96px; top: 72px; }
       .node { top: 72px; }
     }
 
@@ -246,17 +245,12 @@
     <div class="thread" aria-hidden="true"><div class="thread__fill" id="fill"></div></div>
 
     <header class="head">
-      <div class="logo">AI<span>Anti</span>Chaos</div>
+      <div class="logo"><img class="logo__mark" src="assets/logo.png" alt="" width="49" height="40">AI<span>Anti</span>Chaos</div>
       <a class="head__link" href="https://t.me/neonick">Telegram</a>
     </header>
 
     <!-- HERO -->
     <section class="section hero">
-      <svg class="hero__tangle" viewBox="0 0 120 150" fill="none" aria-hidden="true">
-        <path d="M60 150 L60 96" stroke="#E58A3C" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M60 96 C30 86 22 64 44 54 C70 42 86 60 70 74 C56 86 34 78 40 58 C46 38 78 30 92 44 C104 56 96 80 74 84 C44 90 26 70 38 48 C48 30 76 24 88 32"
-              stroke="#15241D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
-      </svg>
       <h1 class="reveal">Я годами начинал и бросал. Пока не навёл порядок с помощью нейросети.</h1>
       <p class="hero__sub reveal">Так я жил много лет. Перепробовал все блокноты и таск-трекеры — и каждый бросал. Потом собрал из Claude личную систему, которая держит все мои дела и память. Проекты наконец поехали. Научу тебя сделать так же, буквально за неделю.</p>
       <a class="btn reveal" href="https://t.me/neonick">
