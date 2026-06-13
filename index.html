@@ -185,6 +185,13 @@
     .grew li b { color: var(--ink); font-weight: 600; }
     .grew li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
 
+    /* ── Отстройка (манифест) ───────────────────────── */
+    .manifesto { background: var(--pine); color: var(--paper); border-radius: 32px; padding-right: 44px; margin: 16px 0; }
+    .manifesto .node { background: var(--pine); }
+    .manifesto__eyebrow { display: block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #9DB3A6; margin-bottom: 22px; }
+    .manifesto__big { font-family: var(--display); font-weight: 700; font-size: clamp(1.6rem, 3.6vw, 2.5rem); line-height: 1.18; letter-spacing: -0.01em; margin: 0; max-width: 22ch; }
+    .manifesto__big b { color: var(--amber); }
+
     /* ── Этапы (нумерация оправдана) ────────────────── */
     .steps { display: grid; gap: 4px; margin-top: 8px; }
     .step { display: grid; grid-template-columns: auto 1fr; gap: 22px; padding: 24px 0; border-top: 1px solid var(--line); }
@@ -228,7 +235,7 @@
       body { font-size: 17px; }
       .wrap { padding-right: 20px; }
       .section { padding: 64px 0 64px var(--pad); }
-      .recognise, .price { padding-right: 20px; border-radius: 22px; }
+      .recognise, .price, .manifesto { padding-right: 20px; border-radius: 22px; }
       .head, .foot { padding-left: var(--pad); }
       .node { top: 72px; }
     }
@@ -297,9 +304,16 @@
             <li><b>Этот сайт</b> — тоже часть той же системы.</li>
             <li>А ещё вики, телеграм-бот, статьи, рассказы — то, что годами лежало «когда-нибудь».</li>
           </ul>
-          <p class="reveal" style="margin-top:24px">Я давно люблю делать полезное — opensource, статьи в Википедии, карты, митапы для разработчиков. Помогать — это про меня. И мне обидно смотреть, как мощный инструмент проходит мимо: большинство используют нейросети либо как поиск, либо чтобы писать код. Почти никто не строит из них систему, которая наводит порядок в собственной жизни. Этому я и хочу научить.</p>
+          <p class="reveal" style="margin-top:24px">Я давно люблю делать полезное — opensource, статьи в Википедии, карты, митапы для разработчиков. Помогать — это про меня. Поэтому и хочу научить других тому, что вытащило меня самого.</p>
         </div>
       </div>
+    </section>
+
+    <!-- ОТСТРОЙКА -->
+    <section class="section manifesto">
+      <span class="node" aria-hidden="true"></span>
+      <span class="manifesto__eyebrow reveal">Чем это отличается</span>
+      <p class="manifesto__big reveal">Почти все учат нейросети писать код — вайбкодинг и приложения. <b>Я учу другому:</b> собрать из неё личную систему, которая наводит порядок в делах и голове.</p>
     </section>
 
     <!-- ФОРМАТ -->
