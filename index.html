@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ИИ Анти Хаос: персональная OS и автоматизация бизнеса</title>
-  <meta name="description" content="Создаю персональные OS с памятью о проектах и автоматизирую бизнес-рутину. Разбираю задачу и собираю рабочую систему под конкретного человека или компанию.">
+  <title>ИИАнтиХаос: персональная система с ИИ и автоматизация бизнеса</title>
+  <meta name="description" content="Создаю персональные рабочие системы с ИИ и автоматизирую бизнес-рутину. Разбираю задачу и собираю готовое решение под конкретного человека или компанию.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ИИ Анти Хаос: персональная OS и автоматизация бизнеса">
-  <meta property="og:description" content="Создаю персональные OS с памятью о проектах и автоматизирую бизнес-рутину под конкретного человека или компанию.">
+  <meta property="og:title" content="ИИАнтиХаос: персональная система с ИИ и автоматизация бизнеса">
+  <meta property="og:description" content="Создаю персональные рабочие системы с ИИ и автоматизирую бизнес-рутину под конкретного человека или компанию.">
   <meta property="og:url" content="https://aiantichaos.ru">
   <meta property="og:image" content="https://aiantichaos.ru/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -15,9 +15,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://aiantichaos.ru/assets/og.png">
   <meta name="theme-color" content="#15241D">
+  <link rel="icon" href="favicon.ico" sizes="64x64">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700&amp;family=Onest:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --paper: #EDF0EE;
@@ -25,8 +26,10 @@
       --ink: #15241D;
       --pine: #2E4A3E;
       --sage: #8AA396;
+      --sage-text: #587063;
       --muted: #51635A;
       --amber: #E58A3C;
+      --amber-text: #A64F0A;
       --amber-deep: #C9701F;
       --line: #D2DAD5;
       --rail: 44px;
@@ -96,8 +99,8 @@
       z-index: 2;
     }
     .section.is-active .node {
-      border-color: var(--amber);
-      background: var(--amber);
+      border-color: var(--amber-text);
+      background: var(--amber-text);
       transform: scale(1.15);
     }
 
@@ -106,7 +109,7 @@
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--sage);
+      color: var(--sage-text);
       margin: 0 0 18px;
     }
 
@@ -126,7 +129,7 @@
     .logo { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
     .logo__mark { height: 40px; width: auto; display: block; }
     .logo__name { display: inline-flex; }
-    .logo__accent { color: var(--amber); }
+    .logo__accent { color: var(--amber-text); }
     .head__link { font-size: 0.95rem; font-weight: 500; color: var(--muted); text-decoration: none; }
     .head__link:hover { color: var(--ink); }
 
@@ -172,9 +175,12 @@
       content: "";
       position: absolute; left: 0; top: 9px;
       width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid var(--sage);
+      border: 2px solid var(--sage-text);
     }
-    .recognise__close { font-family: var(--display); font-weight: 600; font-size: 1.2rem; color: var(--pine); margin: 0; }
+    .audiences { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .audience h3 { font-size: 1.16rem; color: var(--pine); margin-bottom: 18px; }
+    .audience .checks { margin-bottom: 0; }
+    .recognise__close { font-family: var(--display); font-weight: 600; font-size: 1.2rem; color: var(--pine); margin: 34px 0 0; }
 
     /* ── История ────────────────────────────────────── */
     .story__grid { display: grid; grid-template-columns: 1fr; gap: 36px; }
@@ -184,12 +190,12 @@
     .grew__title { font-family: var(--display); font-weight: 600; font-size: 1.05rem; color: var(--pine); margin-bottom: 4px; }
     .grew li { padding-left: 22px; position: relative; color: var(--muted); }
     .grew li b { color: var(--ink); font-weight: 600; }
-    .grew li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+    .grew li::before { content: "→"; position: absolute; left: 0; color: var(--amber-text); font-weight: 700; }
 
     /* ── Отстройка (манифест) ───────────────────────── */
     .manifesto { background: var(--pine); color: var(--paper); border-radius: 32px; padding-right: 44px; margin: 16px 0; }
     .manifesto .node { background: var(--pine); }
-    .manifesto__eyebrow { display: block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #9DB3A6; margin-bottom: 22px; }
+    .manifesto__eyebrow { display: block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #B7C6BD; margin-bottom: 22px; }
     .manifesto__big { font-family: var(--display); font-weight: 700; font-size: clamp(1.6rem, 3.6vw, 2.5rem); line-height: 1.18; letter-spacing: -0.01em; margin: 0; max-width: 22ch; }
     .manifesto__big b { color: var(--amber); }
 
@@ -197,7 +203,7 @@
     .steps { display: grid; gap: 4px; margin-top: 8px; }
     .step { display: grid; grid-template-columns: auto 1fr; gap: 22px; padding: 24px 0; border-top: 1px solid var(--line); }
     .step:last-child { border-bottom: 1px solid var(--line); }
-    .step__num { font-family: var(--display); font-weight: 700; font-size: 1.5rem; color: var(--amber); line-height: 1; padding-top: 2px; }
+    .step__num { font-family: var(--display); font-weight: 700; font-size: 1.5rem; color: var(--amber-text); line-height: 1; padding-top: 2px; }
     .step__t { font-family: var(--display); font-weight: 600; font-size: 1.18rem; margin: 0 0 8px; }
     .step__d { color: var(--muted); margin: 0; }
 
@@ -205,11 +211,12 @@
     .keep { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 18px; }
     .keep li { padding-left: 30px; position: relative; }
     .keep li b { font-family: var(--display); }
+    .result__close, .story__close { margin-top: 24px; }
     .keep li::before {
       content: "";
       position: absolute; left: 0; top: 8px;
       width: 14px; height: 14px; border-radius: 4px;
-      background: var(--amber);
+      background: var(--amber-text);
     }
 
     /* ── Цена (тёмная) ──────────────────────────────── */
@@ -219,17 +226,21 @@
     .price__num { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 7vw, 4rem); line-height: 1; margin: 0 0 12px; }
     .price__num b { color: var(--amber); }
     .price__what { color: #B7C6BD; max-width: 40ch; margin-bottom: 34px; }
-    .price__what + .price__what { margin-top: -16px; }
+    .price__business { max-width: 44ch; padding-top: 24px; margin: 0 0 34px; border-top: 1px solid #395047; }
+    .price__business h3 { color: var(--paper); font-size: 1.18rem; margin-bottom: 8px; }
+    .price__business p { color: #B7C6BD; margin: 0; }
     .price__micro { color: #93A89C; font-size: 0.95rem; margin: 18px 0 0; max-width: 42ch; }
 
     /* ── Footer ─────────────────────────────────────── */
-    .foot { padding: 34px 0 44px var(--pad); color: var(--sage); font-size: 0.88rem; max-width: calc(var(--max) + var(--pad)); }
+    .foot { padding: 34px 0 44px var(--pad); color: var(--sage-text); font-size: 0.88rem; max-width: calc(var(--max) + var(--pad)); }
 
     /* ── Reveal ─────────────────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal { transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.is-pending { opacity: 0; transform: translateY(20px); }
     .reveal.is-in { opacity: 1; transform: none; }
 
-    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber-text); outline-offset: 3px; border-radius: 6px; }
+    .price .btn:focus-visible { outline-color: #B7C6BD; }
 
     /* ── Адаптив ────────────────────────────────────── */
     @media (max-width: 680px) {
@@ -240,7 +251,8 @@
       .recognise, .price, .manifesto { padding-right: 20px; border-radius: 22px; }
       .head, .foot { padding-left: var(--pad); }
       .node { top: 72px; }
-      .price .btn { gap: 8px; padding-inline: 20px; font-size: 1rem; white-space: nowrap; }
+      .audiences { grid-template-columns: 1fr; gap: 34px; }
+      .price .btn { gap: 8px; padding-inline: 20px; font-size: 1rem; }
     }
 
     @media (min-width: 720px) {
@@ -249,7 +261,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal, .reveal.is-pending { opacity: 1; transform: none; transition: none; }
       .thread__fill { transition: none; }
       .btn:hover { transform: none; }
     }
@@ -267,26 +279,50 @@
     <!-- HERO -->
     <section class="section hero">
       <h1 class="reveal">В голове всегда было сто проектов. До конца доходил хорошо если один.</h1>
-      <p class="hero__sub reveal">Я перепробовал блокноты, GTD и таск-трекеры. Потом собрал персональную OS вокруг ИИ: она помнит контекст, помогает разгружать голову и возвращаться к проектам после любого перерыва. Теперь я создаю такие системы для других и автоматизирую бизнес-рутину, которую давно пора перестать делать руками.</p>
+      <p class="hero__sub reveal">Я перепробовал блокноты, GTD и таск-трекеры. Потом собрал персональную OS — личную рабочую систему с памятью о проектах, задачах и решениях. Теперь создаю такие системы для клиентов и автоматизирую бизнес-рутину, которую давно пора перестать делать руками.</p>
       <a class="btn reveal" href="https://t.me/neonick">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
         Обсудить задачу
       </a>
     </section>
 
+    <!-- РЕЗУЛЬТАТ -->
+    <section class="section result">
+      <span class="node" aria-hidden="true"></span>
+      <h2 class="reveal">С чем я могу помочь</h2>
+      <p class="reveal">Два направления: личная рабочая система и автоматизация отдельных задач бизнеса.</p>
+      <ul class="keep">
+        <li class="reveal"><b>Персональная OS</b>: память, проекты, задачи, решения и рабочие правила в одной системе.</li>
+        <li class="reveal"><b>Автоматизация рутины</b>: сбор и обработка данных, отчёты, документы, повторяющиеся операции и связки между сервисами.</li>
+        <li class="reveal"><b>Небольшой внутренний инструмент</b>: решение под конкретный процесс, ради которого нет смысла покупать большую платформу.</li>
+      </ul>
+      <p class="result__close reveal">На выходе остаётся готовая система, уже проверенная на твоих данных и задачах.</p>
+    </section>
+
     <!-- УЗНАВАНИЕ -->
     <section class="section recognise">
       <span class="node" aria-hidden="true"></span>
-      <h2 class="reveal">Знакомо?</h2>
-      <ul class="checks">
-        <li class="reveal">Ставишь очередной таск-трекер, неделю честно его ведёшь, потом перестаёшь открывать.</li>
-        <li class="reveal">Задач становится столько, что проще вообще не смотреть на список.</li>
-        <li class="reveal">Начать новый проект легко. Вернуться к нему через месяц почти невозможно.</li>
-        <li class="reveal">Важные решения остаются в старых чатах и каждый раз принимаются заново.</li>
-        <li class="reveal">В бизнесе данные приходится таскать между таблицами, сервисами и документами руками.</li>
-        <li class="reveal">Одна и та же рутина повторяется каждую неделю, хотя её давно можно было автоматизировать.</li>
-      </ul>
-      <p class="recognise__close reveal">У меня это было не иногда. Это был обычный способ жить и работать.</p>
+      <h2 class="reveal">С чем ко мне приходят</h2>
+      <div class="audiences">
+        <div class="audience">
+          <h3 class="reveal">Личный хаос</h3>
+          <ul class="checks">
+            <li class="reveal">Очередной таск-трекер заброшен через неделю.</li>
+            <li class="reveal">Задач столько, что проще вообще не смотреть на список.</li>
+            <li class="reveal">Начать новый проект легко, а вернуться к нему через месяц почти невозможно.</li>
+            <li class="reveal">Важные решения остаются в старых чатах и каждый раз принимаются заново.</li>
+          </ul>
+        </div>
+        <div class="audience">
+          <h3 class="reveal">Бизнес-рутина</h3>
+          <ul class="checks">
+            <li class="reveal">Данные вручную переносятся между таблицами, сервисами и документами.</li>
+            <li class="reveal">Одна и та же работа повторяется каждую неделю.</li>
+            <li class="reveal">Не хватает небольшого внутреннего инструмента под свой процесс.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="recognise__close reveal">В обоих случаях работа держится на памяти и ручных действиях. Эту часть можно вынести в систему.</p>
     </section>
 
     <!-- ИСТОРИЯ -->
@@ -294,11 +330,11 @@
       <span class="node" aria-hidden="true"></span>
       <h2 class="reveal">Я сам такой</h2>
       <div class="story__grid">
-        <img class="story__photo reveal" src="assets/nikolay-marchenko.jpg" alt="Николай, автор ИИ Анти Хаос" width="320" height="400">
+        <img class="story__photo reveal" src="assets/nikolay-marchenko.jpg" alt="Николай, автор ИИАнтиХаос" width="320" height="400">
         <div>
-          <p class="story__lead reveal">У меня диагностированный СДВГ. Я мог загореться новой идеей, неделю делать её ночами, а потом просто потерять нить. Не решить, что проект плохой. Именно потерять: где остановился, зачем начинал и какой должен быть следующий шаг.</p>
+          <p class="story__lead reveal">У меня диагностированный СДВГ. Я мог загореться новой идеей, неделю делать её ночами, а потом просто потерять нить. Проект всё ещё был мне нужен, но я уже не понимал, где остановился, зачем начинал и что делать дальше.</p>
           <p class="reveal">Зимой 2025 года я перестал пользоваться Claude как умным поиском и начал складывать туда контекст: проекты, решения, планы, неудачные попытки. Постепенно вокруг этого выросла персональная OS с памятью, рабочими правилами и автоматизациями.</p>
-          <p class="reveal">Хаос никуда не исчез. Просто теперь мне не приходится удерживать всё собственной головой. Система помнит, где я остановился, и помогает продолжить работу даже через несколько месяцев.</p>
+          <p class="reveal">Хаос никуда не исчез. Просто теперь мне не приходится удерживать всё собственной головой. Система хранит контекст каждого проекта и показывает, с чего продолжить, даже если я вернулся через несколько месяцев.</p>
           <ul class="grew reveal">
             <li class="grew__title">Вот что из этого выросло:</li>
             <li><b>BirdwatchingKrasnodar</b>: экскурсии, многодневные туры и клуб людей, которые ездят смотреть птиц.</li>
@@ -306,7 +342,7 @@
             <li><b>Тумари</b>: писательский проект, описание лора мира бесконечного дождя. Подготовка фундамента для книг и игр.</li>
             <li><b>Статьи о птицах, небольшие приложения и рабочие инструменты</b>, которые раньше годами лежали в папке «когда-нибудь».</li>
           </ul>
-          <p class="reveal" style="margin-top:24px">Раньше большая часть этого осталась бы на уровне идеи. Теперь у каждого проекта есть контекст, история решений и понятный следующий шаг.</p>
+          <p class="story__close reveal">Раньше большая часть этого осталась бы на уровне идеи. Теперь у каждого проекта есть контекст, история решений и понятный следующий шаг.</p>
         </div>
       </div>
     </section>
@@ -314,8 +350,8 @@
     <!-- ОТСТРОЙКА -->
     <section class="section manifesto">
       <span class="node" aria-hidden="true"></span>
-      <span class="manifesto__eyebrow reveal">Чем это отличается</span>
-      <p class="manifesto__big reveal"><b>Вайбкодинг тут ни при чём.</b> Я использую ИИ как внешнюю память и рабочую среду: он сохраняет контекст, помогает принимать решения и продолжает работу с того места, где мы остановились. В бизнесе тот же подход превращает повторяющиеся операции в инструменты и автоматизации.</p>
+      <span class="manifesto__eyebrow reveal">Как я работаю</span>
+      <p class="manifesto__big reveal"><b>Я собираю рабочие системы вокруг ИИ.</b> Для человека это внешняя память: она хранит контекст и помогает вернуться к проекту после перерыва. Для бизнеса — скрипты, связки сервисов и небольшие внутренние инструменты, которые забирают повторяющуюся работу.</p>
     </section>
 
     <!-- ФОРМАТ -->
@@ -342,40 +378,30 @@
           <div class="step__num">3</div>
           <div>
             <p class="step__t">Второй звонок, 2 часа</p>
-            <p class="step__d">Смотрим, что прижилось, а что забуксовало. Убираем лишнее и доводим систему до состояния, в котором ей удобно пользоваться каждый день.</p>
+            <p class="step__d">Смотрим, что прижилось. Лишнее убираем, неудобное переделываем. После этого системой можно пользоваться без моей постоянной помощи.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- РЕЗУЛЬТАТ -->
-    <section class="section result">
-      <span class="node" aria-hidden="true"></span>
-      <h2 class="reveal">Что можно собрать</h2>
-      <p class="reveal">Я работаю и с личными системами, и с отдельными задачами бизнеса:</p>
-      <ul class="keep">
-        <li class="reveal"><b>Персональную OS</b>: память, проекты, задачи, решения и рабочие правила в одной системе.</li>
-        <li class="reveal"><b>Автоматизацию рутины</b>: сбор и обработку данных, отчёты, документы, повторяющиеся операции и связки между сервисами.</li>
-        <li class="reveal"><b>Небольшой внутренний инструмент</b>: то, чего не хватает именно твоему бизнесу и ради чего нет смысла покупать большую чужую платформу.</li>
-      </ul>
-      <p class="reveal" style="margin-top:24px">Конкретный результат зависит от задачи. Главное, что в конце остаётся рабочая система, а не презентация о том, как она когда-нибудь будет работать.</p>
-    </section>
-
     <!-- ЦЕНА -->
     <section class="section price">
       <span class="node" aria-hidden="true"></span>
-      <h2 class="reveal">Стоимость</h2>
+      <h2 class="reveal">Персональная OS</h2>
       <p class="price__num reveal"><b>9 900 ₽</b></p>
-      <p class="price__what reveal"><b>Персональная OS</b>: два звонка по 2 часа и неделя сопровождения между ними.</p>
-      <p class="price__what reveal"><b>Автоматизация бизнеса</b>: стоимость определяем после разбора задачи, объёма работы и ожидаемого результата.</p>
+      <p class="price__what reveal">Два звонка по 2 часа и неделя сопровождения между ними.</p>
+      <div class="price__business reveal">
+        <h3>Автоматизация бизнеса</h3>
+        <p>Стоимость определяем после разбора задачи, объёма работы и ожидаемого результата.</p>
+      </div>
       <a class="btn reveal" href="https://t.me/neonick">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
-        Обсудить задачу в Telegram
+        Обсудить задачу
       </a>
       <p class="price__micro reveal">Опиши задачу в двух-трёх предложениях. Я посмотрю и честно скажу, смогу ли помочь.</p>
     </section>
 
-    <footer class="foot">ИИ Анти Хаос · @neonick · 2026</footer>
+    <footer class="foot">ИИАнтиХаос · @neonick · 2026</footer>
   </div>
 
   <script>
@@ -410,10 +436,17 @@
 
       var rio = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add('is-in'); rio.unobserve(en.target); }
+          if (en.isIntersecting) {
+            en.target.classList.remove('is-pending');
+            en.target.classList.add('is-in');
+            rio.unobserve(en.target);
+          }
         });
       }, { rootMargin: '0px 0px -10% 0px' });
-      document.querySelectorAll('.reveal').forEach(function (e) { rio.observe(e); });
+      document.querySelectorAll('.reveal').forEach(function (e) {
+        e.classList.add('is-pending');
+        rio.observe(e);
+      });
 
       window.addEventListener('scroll', updateThread, { passive: true });
       window.addEventListener('resize', updateThread);
