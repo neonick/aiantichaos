@@ -123,9 +123,10 @@
       padding: 26px 0 26px var(--pad);
       max-width: calc(var(--max) + var(--pad));
     }
-    .logo { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; word-spacing: -0.18em; }
+    .logo { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
     .logo__mark { height: 40px; width: auto; display: block; }
-    .logo span { color: var(--amber); }
+    .logo__name { display: inline-flex; }
+    .logo__accent { color: var(--amber); }
     .head__link { font-size: 0.95rem; font-weight: 500; color: var(--muted); text-decoration: none; }
     .head__link:hover { color: var(--ink); }
 
@@ -257,7 +258,7 @@
     <div class="thread" aria-hidden="true"><div class="thread__fill" id="fill"></div></div>
 
     <header class="head">
-      <div class="logo"><img class="logo__mark" src="assets/logo.png" alt="" width="49" height="40">ИИ <span>Анти</span> Хаос</div>
+      <div class="logo"><img class="logo__mark" src="assets/logo.png" alt="" width="49" height="40"><span class="logo__name">ИИ<span class="logo__accent">Анти</span>Хаос</span></div>
       <a class="head__link" href="https://t.me/neonick">Telegram</a>
     </header>
 
@@ -291,7 +292,7 @@
       <span class="node" aria-hidden="true"></span>
       <h2 class="reveal">Я сам такой</h2>
       <div class="story__grid">
-        <img class="story__photo reveal" src="assets/portrait_placeholder.svg" alt="Николай, автор ИИ Анти Хаос" width="320" height="400">
+        <img class="story__photo reveal" src="assets/nikolay-marchenko.jpg" alt="Николай, автор ИИ Анти Хаос" width="320" height="400">
         <div>
           <p class="story__lead reveal">У меня диагностированный СДВГ и постоянный хаос в голове. Всегда была куча идей, и почти ни одна не доходила до реализации. Дела начинались на энтузиазме, какое-то время делались, потом бросались. Я перепробовал все методы и приложения для продуктивности, прочитал пару десятков книг по продуктивности и GTD. Не помогало ничего. Список задач только копился, пока не становилось проще его не открывать.</p>
           <p class="reveal">Нейросетями я интересуюсь с конца 2022 года. Долго пользовался ими как очень умным гуглом: спросить, получить ответ. А зимой 2025 решил построить из Claude свою личную систему: с памятью, с планированием, с задачами. Не ради кодинга. Ради порядка в делах и голове. Система получилась на редкость стабильная и цельная, и все мои давно планируемые проекты полетели.</p>
